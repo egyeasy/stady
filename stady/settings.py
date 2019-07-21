@@ -125,3 +125,6 @@ STATIC_URL = '/static/'
 
 # django-heroku setting
 django_heroku.settings(locals())
+
+# customize user
+AUTH_USER_MODEL = 'user.User'
