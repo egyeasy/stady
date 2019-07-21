@@ -32,17 +32,18 @@ class Test(models.Model):
     tamguSecondName = models.CharField(max_length=20)
     tamguSecondGrade = models.IntegerField()
     tamguSecondPoint = models.IntegerField()
+    foreignName = models.CharField(max_length=20)
     foreignGrade = models.IntegerField()
     foreignPoint = models.IntegerField()
     
     def __str__(self):
-        return self.month
+        return f"{self.month}"
     
 
 class TargetUniv(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     order = models.IntegerField()
-    univ = models.CharField(max_length=20)
+    univ = models.CharField(max_length=30)
     major = models.CharField(max_length=30)
     applyType = models.CharField(max_length=30)
     
