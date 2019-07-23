@@ -123,6 +123,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# 파일 주소에 접미사를 만들어줌
+MEDIA_URL = '/media/'
+
+
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static'),
+)
+
+# 절대경로로 나타내기 때문에 os.path.join 사용
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # django-heroku setting
 django_heroku.settings(locals())
 
