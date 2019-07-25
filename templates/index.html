@@ -26,7 +26,13 @@
     
   <!-- Custom : Font Awesome-->
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
-
+  
+  <!--  custom css  -->
+  <style>
+    .bg-primary {
+      background-color: white !important;
+    }
+  </style>
 </head>
 
 <body id="page-top">
@@ -58,16 +64,12 @@
   </nav>
 
   <!-- Masthead -->
-  <header class="masthead">
-    <div class="container h-100">
-      {% block body %}
-      
-      {% endblock %}
-    </div>
-  </header>
+  {% block masthead %}
+
+  {% endblock %}
 
   <!-- About Section -->
-  <section class="page-section bg-primary" id="about">
+  <!-- <section class="page-section bg-primary" id="about">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
@@ -78,10 +80,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
+      {% block body %}
+      
+      {% endblock %}
   <!-- Services Section -->
-  <section class="page-section" id="services">
+  <!-- <section class="page-section" id="services">
     <div class="container">
       <h2 class="text-center mt-0">At Your Service</h2>
       <hr class="divider my-4">
@@ -116,10 +121,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Portfolio Section -->
-  <section id="portfolio">
+  <!-- <section id="portfolio">
     <div class="container-fluid p-0">
       <div class="row no-gutters">
         <div class="col-lg-4 col-sm-6">
@@ -202,18 +207,18 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Call to Action Section -->
-  <section class="page-section bg-dark text-white">
+  <!-- <section class="page-section bg-dark text-white">
     <div class="container text-center">
       <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
       <a class="btn btn-light btn-xl" href="https://startbootstrap.com/themes/creative/">Download Now!</a>
     </div>
-  </section>
+  </section> -->
 
   <!-- Contact Section -->
-  <section class="page-section" id="contact">
+  <!-- <section class="page-section" id="contact">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
@@ -229,12 +234,12 @@
         </div>
         <div class="col-lg-4 mr-auto text-center">
           <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
-          <!-- Make sure to change the email address in anchor text AND the link below! -->
+          Make sure to change the email address in anchor text AND the link below!
           <a class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Footer -->
   <footer class="bg-light py-5">

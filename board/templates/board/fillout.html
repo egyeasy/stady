@@ -1,23 +1,78 @@
 {% extends 'index.html' %}
 
-<!-- {% block body %} -->
+{% load bootstrap4 %}
+
+{% block body %}
+<section class="page-section bg-primary" id="about">
+  <div class="container">
 <h1>
     내 정보
 </h1>
 <h3>
-    생활기록부
+    1. 내신
+</h3>
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form schoolRecordForm %}
+    {% buttons %}
+        <button type="submit" class="btn btn-dark">저장</button>
+    {% endbuttons %}
+</form>
+<h3>
+    2. 모의고사
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
 </h3>
 <h3>
-    생활기록부
+    3. 목표 대학
 </h3>
 <h3>
-    생활기록부
-</h3>
-<h3>
-    생활기록부
-</h3>
-<h3>
-    생활기록부
+    4. 추가질의
 </h3>
 
-<!-- {% endblock %} -->
+  </div>
+</section>
+{% endblock %}
+
+
+  <!-- About Section -->
+  <!-- <section class="page-section bg-primary" id="about">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-white mt-0">We've got what you need!</h2>
+          <hr class="divider light my-4">
+          <p class="text-white-50 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+        </div>
+      </div>
+    </div>
+  </section> -->
