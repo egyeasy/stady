@@ -17,6 +17,14 @@
     {% buttons %}
         <button type="submit" class="btn btn-dark">저장</button>
     {% endbuttons %}
+    
+    <h3>
+    3. 목표 대학
+    </h3>
+    {% bootstrap_form targetUnivForm %}
+    {% buttons %}
+        <button type="submit" class="btn btn-dark">저장</button>
+    {% endbuttons %}
 </form>
 <h3>
     2. 모의고사
@@ -51,9 +59,29 @@
       </tbody>
     </table>
 </h3>
-<h3>
-    3. 목표 대학
-</h3>
+      
+      
+
+<form method="POST">
+	{% csrf_token %}
+    
+</form>
+<form method="POST">
+	{% csrf_token %}
+    {% bootstrap_form targetUnivForm %}
+    {% buttons %}
+        <button type="submit" class="btn btn-dark">저장</button>
+    {% endbuttons %}
+</form>
+<form method="POST">
+	{% csrf_token %}
+    {% bootstrap_form targetUnivForm %}
+    {% buttons %}
+        <button type="submit" class="btn btn-dark">저장</button>
+    {% endbuttons %}
+</form>
+      
+      
 <h3>
     4. 추가질의
 </h3>

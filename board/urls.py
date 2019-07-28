@@ -5,5 +5,8 @@ app_name = "board"
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('fillout', views.fillout, name="fillout"),
+    path('fillout-school', views.fillout_school, name="fillout_school"),
+	path('fillout-test', views.fillout_test, name="fillout_test"),
+    path('fillout-target', views.fillout_target, name="fillout_target"),
+    path('fillout-question', views.fillout_question, name="fillout_question"),
 ]

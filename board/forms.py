@@ -1,5 +1,5 @@
 from django import forms
-from .models import SchoolRecord
+from .models import SchoolRecord, TargetUniv
 
 
 class SchoolRecordForm(forms.ModelForm):
@@ -55,5 +55,12 @@ class TargetUnivForm(forms.ModelForm):
     univ = forms.CharField(max_length=30)
     major = forms.CharField(max_length=30)
     applyType = forms.CharField(max_length=30)
-
-        
+    
+    class Meta:
+        model = TargetUniv
+        fields = [
+            'order',
+            'univ',
+            'major',
+            'applyType'
+        ]
