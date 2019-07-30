@@ -1,17 +1,34 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% load bootstrap4 %}
 
 {% block body %}
 <section class="page-section bg-primary" id="about">
   <div class="container">
-<h1>
-    내 정보
-</h1>
+    <h1>
+        내 정보
+    </h1>
+    
+    <!-- fillout nav -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'board:fillout_school' %}">내신</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'board:fillout_target' %}">목표 대학</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'board:fillout_question' %}">Q&A</a>
+      </li>
+    </ul>
     
     <h3>
     3. 목표 대학
     </h3>
+      
     <form method="POST">
         {% bootstrap_form targetUnivForm %}
         {% buttons %}

@@ -1,92 +1,52 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
+
 
 {% load bootstrap4 %}
 
+
 {% block body %}
 <section class="page-section bg-primary" id="about">
-  <div class="container">
-<h1>
-    내 정보
-</h1>
-<h3>
-    1. 내신
-</h3>
-<form method="POST">
-    {% csrf_token %}
-    {% bootstrap_form schoolRecordForm %}
-    {% buttons %}
-        <button type="submit" class="btn btn-dark">저장</button>
-    {% endbuttons %}
-    
-    <h3>
-    3. 목표 대학
-    </h3>
-    {% bootstrap_form targetUnivForm %}
-    {% buttons %}
-        <button type="submit" class="btn btn-dark">저장</button>
-    {% endbuttons %}
-</form>
-<h3>
-    2. 모의고사
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-</h3>
-      
-      
+    <div class="container">
+        <h1>
+            내 정보
+        </h1>
+        
+        <!-- fillout nav -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'board:fillout_school' %}">내신</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_target' %}">목표 대학</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_question' %}">Q&A</a>
+          </li>
+        </ul>
 
-<form method="POST">
-	{% csrf_token %}
-    
-</form>
-<form method="POST">
-	{% csrf_token %}
-    {% bootstrap_form targetUnivForm %}
-    {% buttons %}
-        <button type="submit" class="btn btn-dark">저장</button>
-    {% endbuttons %}
-</form>
-<form method="POST">
-	{% csrf_token %}
-    {% bootstrap_form targetUnivForm %}
-    {% buttons %}
-        <button type="submit" class="btn btn-dark">저장</button>
-    {% endbuttons %}
-</form>
-      
-      
-<h3>
-    4. 추가질의
-</h3>
+        <h3>
+            1. 내신
+        </h3>
+        <div>
+            학기별 내신 등급을 소수점 둘째 자리에서 반올림해서 입력해주세요.
+        </div>
+        <div>
+            (예: 1학년 1학기 4.33)      
+        </div>
+        <p class="w-50">
+            <form class="w-50" method="POST">
+                {% csrf_token %}
+                {{ schoolRecordForm.as_table }}
+                {% buttons %}
+                    <button type="submit" class="btn btn-dark">저장</button>
+                {% endbuttons %}
 
-  </div>
+            </form>
+        </p>
+    </div>
 </section>
 {% endblock %}
 

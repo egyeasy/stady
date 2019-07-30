@@ -8,14 +8,14 @@ def index(request):
 
 
 def fillout_school(request):
+    
     if request.method == "POST":
         print(request.POST)
-        schoolRecordForm = request.POST
-        context = {
-            
-        }
+        schoolRecordForm = SchoolRecordForm(request.POST)
         if schoolRecordForm.is_valid():
-            schoolRecordForm.save()
+            form = schoolRecordForm.save(commit=False)
+            form.user = request.user
+            form.save()
         return redirect('board:fillout_test')
     else:
         # 작성한 게 있을 때 가져와서 보여주기

@@ -3,39 +3,45 @@ from .models import SchoolRecord, TargetUniv
 
 
 class SchoolRecordForm(forms.ModelForm):
-    firstFirst = forms.FloatField(required=False, max_value=10, min_value=0,
+    firstFirst = forms.FloatField(label="1학년 1학기", required=False, max_value=10, min_value=0,
       widget=forms.NumberInput(
           attrs={
             'id': 'form_firstFirst',
-            'step': "0.01"
+            'step': "0.01",
+            'placeholder': '',
           }))
-    firstSecond = forms.FloatField(required=False, max_value=10, min_value=0,
+    firstSecond = forms.FloatField(label="1학년 2학기", required=False, max_value=10, min_value=0,
       widget=forms.NumberInput(
           attrs={
             'id': 'form_firstSecond',
-            'step': "0.01"
+            'step': "0.01",
+            'placeholder': '',
           }))
-    secondFirst = forms.FloatField(required=False, max_value=10, min_value=0,
+    secondFirst = forms.FloatField(label="2학년 1학기", required=False, max_value=10, min_value=0,
       widget=forms.NumberInput(
-          attrs={'id': 'form_secondFirst',
-                 'step': "0.01"
-                }))
-    secondSecond = forms.FloatField(required=False, max_value=10, min_value=0,
+      attrs={'id': 'form_secondFirst',
+             'step': "0.01",
+            'placeholder': '',
+            }))
+    secondSecond = forms.FloatField(label="2학년 2학기", required=False, max_value=10, min_value=0,
       widget=forms.NumberInput(
           attrs={'id': 'form_secondSecond',
-                 'step': "0.01"
+                 'step': "0.01",
+                 'placeholder': '',
                 }))
-    thirdFirst = forms.FloatField(required=False, max_value=10, min_value=0,
+    thirdFirst = forms.FloatField(label="3학년 1학기", required=False, max_value=10, min_value=0,
       widget=forms.NumberInput(
           attrs={
             'id': 'form_thirdFirst',
-            'step': "0.01"
+            'step': "0.01",
+            'placeholder': '',
           }))
-    thirdSecond = forms.FloatField(required=False, max_value=10, min_value=0,
+    thirdSecond = forms.FloatField(label="3학년 2학기", required=False, max_value=10, min_value=0,
       widget=forms.NumberInput(
           attrs={
             'id': 'form_thirdSecond',
-            'step': "0.01"
+            'step': "0.01",
+            'placeholder': '',
           }))
     
     class Meta:
