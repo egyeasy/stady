@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import SchoolRecordForm, TargetUnivForm
+from django.forms import formset_factory
+from django.views import View
+from django.contrib.auth.decorators import login_required
+from .forms import SchoolRecordForm, RecordForm, TestForm, TargetUnivForm, QuestionForm
 
 
 # Create your views here.
@@ -7,16 +10,17 @@ def index(request):
     return render(request, 'landing.html')
 
 
+@login_required
 def fillout_school(request):
-    
     if request.method == "POST":
         print(request.POST)
         schoolRecordForm = SchoolRecordForm(request.POST)
+        print(request.user)
         if schoolRecordForm.is_valid():
             form = schoolRecordForm.save(commit=False)
             form.user = request.user
             form.save()
-        return redirect('board:fillout_test')
+        return redirect('board:fillout_record')
     else:
         # 작성한 게 있을 때 가져와서 보여주기
         # 작성한 게 없으면
@@ -27,16 +31,68 @@ def fillout_school(request):
         return render(request, 'board/fillout_school.html', context)
 
 
-def fillout_test(request):
+@login_required
+def fillout_record(request):
     if request.method == "POST":
-        pass
-    else:
+        form = RecordForm(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
+            return redirect('board:fillout_test')
+    recordForm = RecordForm()
+    context = {
+        'recordForm': recordForm,
+    }
+    return render(request, 'board/fillout_record.html', context)
+    
+# def fillout_test(request):
+#     if request.method == "POST":
+#         pass
+#     else:
+#         testForm = TestForm()
+#         context = {
+#             'testForm': testForm,
+#         }
+#         return render(request, 'board/fillout_test.html', context)
+
+
+class TestFormView(View):
+    # We are creating a formset out of the TestForm
+    Test_FormSet = formset_factory(TestForm)
+
+    # Overiding the get method
+    def get(self, request, *args, **kwargs):
+        # Creating an Instance of formset and putting it in context dict
         context = {
-            
-        }
+                'test_form': self.Test_FormSet(),
+                }
         return render(request, 'board/fillout_test.html', context)
 
+    # Overiding the post method
+    def post(self, request, *args, **kwargs):
+        test_formset = self.Test_FormSet(self.request.POST)
+        print("post", self.request.POST)
+        print("formset", test_formset)
+        # # Checking the if the form is valid
+        # if test_formset.is_valid():
+        # To save we have loop through the formset
+        for test in test_formset:
+            if test.is_valid():
+                # Saving in the contacts models
+                form = test.save(commit=False)
+                print("ㅍ모폼포뫂모포", form)
+                form.user = request.user
+                form.save()
+                return redirect('board:fillout_target')
+            else:
+                context = {
+                        'test_form': self.Test_FormSet(),
+                    }
+                return render(request, 'board/fillout_test.html', context)
 
+
+@login_required
 def fillout_target(request):
     if request.method == "POST":
         pass
@@ -48,13 +104,23 @@ def fillout_target(request):
         return render(request, 'board/fillout_target.html', context)
 
 
-
+@login_required
 def fillout_question(request):
     if request.method == "POST":
-        pass
+        questionForm = QuestionForm(request.POST)
+        if questionForm.is_valid():
+            form = questionForm.save(commit=False)
+            form.user = request.user
+            form.save()
+        return redirect('board:overview')
     else:
-        
+        questionForm = QuestionForm()
         context = {
+            'questionForm': questionForm,
         }
         return render(request, 'board/fillout_question.html', context)
 
+
+@login_required
+def overview(request):
+    pass

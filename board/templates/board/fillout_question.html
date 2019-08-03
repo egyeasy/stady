@@ -15,6 +15,9 @@
         <a class="nav-link" href="{% url 'board:fillout_school' %}">내신</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
       </li>
       <li class="nav-item">
@@ -26,11 +29,11 @@
     </ul>
     
     <h3>
-    3. 목표 대학
+    5. Q & A
     </h3>
       
     <form method="POST">
-        {% bootstrap_form targetUnivForm %}
+        {% bootstrap_form questionForm %}
         {% buttons %}
             <button type="submit" class="btn btn-dark">저장</button>
         {% endbuttons %}

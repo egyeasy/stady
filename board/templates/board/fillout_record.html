@@ -8,20 +8,20 @@
     <h1>
         내 정보
     </h1>
-    
+      
     <!-- fillout nav -->
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'board:fillout_school' %}">내신</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
+        <a class="nav-link active" href="{% url 'board:fillout_record' %}">생활기록부</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="{% url 'board:fillout_target' %}">목표 대학</a>
+        <a class="nav-link" href="{% url 'board:fillout_target' %}">목표 대학</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'board:fillout_question' %}">Q&A</a>
@@ -29,11 +29,12 @@
     </ul>
     
     <h3>
-    4. 목표 대학
+    2. 생활기록부
     </h3>
       
     <form method="POST">
-        {% bootstrap_form targetUnivForm %}
+        {% csrf_token %}
+        {% bootstrap_form recordForm %}
         {% buttons %}
             <button type="submit" class="btn btn-dark">저장</button>
         {% endbuttons %}

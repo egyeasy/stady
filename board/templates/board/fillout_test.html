@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
 {% load bootstrap4 %}
 
 {% block body %}
@@ -15,6 +16,9 @@
         <a class="nav-link" href="{% url 'board:fillout_school' %}">내신</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link active" href="{% url 'board:fillout_test' %}">모의고사</a>
       </li>
       <li class="nav-item">
@@ -26,38 +30,123 @@
     </ul>
 
     <h3>
-        2. 모의고사
+        3. 모의고사
     </h3>
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
+     
+      
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+              <fieldset>
+              <legend>Test Details</legend>
+              <div>
+                {{ test_form.management_form }}
+                {% for test in test_form %}
+                    <!-- <div class="link-formset">
+                        {{ test.as_p }}
+                    </div>
+                   -->
+                <div class="link-formset">
+                    <div>
+                        {{ test.year }}
+                    </div>
+                    <div>
+                        {{ test.month }}
+                    </div>
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">과목명</th>
+                          <th scope="col" colspan="2">국어</th>
+                          <th scope="col" colspan="2">수학</th>
+                          <th scope="col" colspan="2">영어</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"></th>
+                          <td>등급</td>
+                          <td>원점수</td>
+                          <td>등급</td>
+                          <td>원점수</td>
+                          <td>등급</td>
+                          <td>원점수</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"></th>
+                          <td><div>{{ test.koreanGrade }}</div></td>
+                          <td><div>{{ test.koreanPoint }}</div></td>
+                          <td><div>{{ test.mathGrade }}</div></td>
+                          <td><div>{{ test.mathPoint }}</div></td>
+                          <td><div>{{ test.englishGrade }}</div></td>
+                          <td><div>{{ test.englishPoint }}</div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">과목명</th>
+                          <th scope="col">탐구1</th>
+                          <th scope="col">{{ test.tamguFirstName }}</th>
+                          <th scope="col">탐구2</th>
+                          <th scope="col">{{ test.tamguSecondName }}</th>
+                          <th scope="col">제2외국어</th>
+                          <th scope="col">{{ test.foreignName }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"></th>
+                          <td>등급</td>
+                          <td>원점수</td>
+                          <td>등급</td>
+                          <td>원점수</td>
+                          <td>등급</td>
+                          <td>원점수</td>
+                        </tr>
+                        <tr>
+                          <th scope="row"></th>
+                          <td><div>{{ test.tamguFirstGrade }}</div></td>
+                          <td><div>{{ test.tamguFirstPoint }}</div></td>
+                          <td><div>{{ test.tamguSecondGrade }}</div></td>
+                          <td><div>{{ test.tamguSecondPoint }}</div></td>
+                          <td><div>{{ test.foreignGrade }}</div></td>
+                          <td><div>{{ test.foreignPoint }}</div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+              </div>
+            </fieldset>
+            
+            {% buttons %}
+                <button type="submit" class="btn btn-dark">저장</button>
+            {% endbuttons %}
+    <script>
+        $('.link-formset').formset({
+            addText: 'Add Test',
+            deleteText: 'Remove Test'
+        });
+    </script>
+            
+    <!-- <form method="POST">
+        {% for field in testForm %}
+            <div>{{field.label_tag}}</div>
+            <div>
+              {{ field.errors }}
+              {{ field }}
+            </div>
+        {% endfor %}
+        {% buttons %}
+            <button type="submit" class="btn btn-dark">저장</button>
+        {% endbuttons %}
+    </form> -->
+      
+    
       
   </div>
 </section>
