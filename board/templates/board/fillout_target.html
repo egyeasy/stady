@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
 {% load bootstrap4 %}
 
 {% block body %}
@@ -32,12 +33,48 @@
     4. 목표 대학
     </h3>
       
-    <form method="POST">
-        {% bootstrap_form targetUnivForm %}
-        {% buttons %}
-            <button type="submit" class="btn btn-dark">저장</button>
-        {% endbuttons %}
-    </form>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+              <fieldset>
+              <div>
+                <div class="link-formset">
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">지망순</th>
+                          <th scope="col">대학교</th>
+                          <th scope="col">전공</th>
+                          <th scope="col">지원전형</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{ target_form.management_form }}
+                        {% for target in target_form %}
+                        <tr>
+                          <th scope="row">{{ target.order }}</th>
+                          <td>{{ target.univ }}</td>
+                          <td>{{ target.major }}</td>
+                          <td>{{ target.applyType }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </fieldset>
+            
+            {% buttons %}
+                <button type="submit" class="btn btn-dark">저장</button>
+            {% endbuttons %}
+    <script>
+        $('.link-formset').formset({
+            addText: '목표 대학 추가',
+            deleteText: '목표 대학 제거'
+        });
+    </script>
    
   </div>
 </section>

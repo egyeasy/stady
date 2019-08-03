@@ -72,38 +72,61 @@ class TestFormView(View):
     # Overiding the post method
     def post(self, request, *args, **kwargs):
         test_formset = self.Test_FormSet(self.request.POST)
-        print("post", self.request.POST)
-        print("formset", test_formset)
-        # # Checking the if the form is valid
-        # if test_formset.is_valid():
-        # To save we have loop through the formset
         for test in test_formset:
             if test.is_valid():
                 # Saving in the contacts models
                 form = test.save(commit=False)
-                print("ㅍ모폼포뫂모포", form)
                 form.user = request.user
                 form.save()
-                return redirect('board:fillout_target')
             else:
                 context = {
                         'test_form': self.Test_FormSet(),
                     }
                 return render(request, 'board/fillout_test.html', context)
+        return redirect('board:fillout_target')
+            
 
+# @login_required
+# def fillout_target(request):
+#     if request.method == "POST":
+#         pass
+#     else:
+#         targetUnivForm = TargetUnivForm()
+#         context = {
+#             'targetUnivForm': targetUnivForm,
+#         }
+#         return render(request, 'board/fillout_target.html', context)
 
-@login_required
-def fillout_target(request):
-    if request.method == "POST":
-        pass
-    else:
-        targetUnivForm = TargetUnivForm()
+    
+class TargetUnivFormView(View):
+    # We are creating a formset out of the TestForm
+    Target_FormSet = formset_factory(TargetUnivForm)
+
+    # Overiding the get method
+    def get(self, request, *args, **kwargs):
+        # Creating an Instance of formset and putting it in context dict
         context = {
-            'targetUnivForm': targetUnivForm,
-        }
+                'target_form': self.Target_FormSet(),
+                }
         return render(request, 'board/fillout_target.html', context)
 
+    # Overiding the post method
+    def post(self, request, *args, **kwargs):
+        target_formset = self.Target_FormSet(self.request.POST)
+        for target in target_formset:
+            if target.is_valid():
+                # Saving in the contacts models
+                form = target.save(commit=False)
+                form.user = request.user
+                form.save()
+            else:
+                context = {
+                        'target_form': self.Target_FormSet(),
+                    }
+                return render(request, 'board/fillout_target.html', context)
+        return redirect('board:fillout_question')
 
+    
 @login_required
 def fillout_question(request):
     if request.method == "POST":
@@ -123,4 +146,8 @@ def fillout_question(request):
 
 @login_required
 def overview(request):
-    pass
+    
+    context = {
+        
+    }
+    return render(request, 'board/fillout_overview.html', context)
