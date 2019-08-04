@@ -32,7 +32,7 @@
     2. 생활기록부
     </h3>
       
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form recordForm %}
         {% buttons %}
