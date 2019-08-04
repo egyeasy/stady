@@ -154,15 +154,15 @@ def fillout_question(request):
 def overview(request):
     schoolRecord = SchoolRecord.objects.get(user=request.user)
     record = Record.objects.get(user=request.user)
+    recordForm = RecordForm(instance=record)
     tests = Test.objects.filter(user=request.user)
-    targetUnivs = TargetUniv.objects.filter(user=request.user)
-    questions = Question.objects.filter(user=request.user)
+    targetUnivs = TargetUniv.objects.filter(user=request.user).order_by('order')
+    question = Question.objects.get(user=request.user)
     context = {
         'schoolRecord': schoolRecord,
-        'record': record,
+        'recordForm': recordForm,
         'tests': tests,
         'targetUnivs': targetUnivs,
-        'questions': questions,
+        'question': question,
     }
-    print(context)
-    return render(request, 'board/fillout_overview.html', context)
+    return render(request, 'board/overview.html', context)
