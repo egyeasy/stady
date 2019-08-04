@@ -40,6 +40,8 @@
             {% csrf_token %}
               <fieldset>
               <div>
+                {{ target_form.management_form }}
+                {% for target in target_form %}
                 <div class="link-formset">
                     <table class="table table-dark">
                       <thead>
@@ -51,24 +53,24 @@
                         </tr>
                       </thead>
                       <tbody>
-                        {{ target_form.management_form }}
-                        {% for target in target_form %}
                         <tr>
                           <th scope="row">{{ target.order }}</th>
                           <td>{{ target.univ }}</td>
                           <td>{{ target.major }}</td>
                           <td>{{ target.applyType }}</td>
                         </tr>
-                        {% endfor %}
                       </tbody>
                     </table>
-                </div>
+                </div> 
+                {% endfor %}
               </div>
             </fieldset>
             
             {% buttons %}
                 <button type="submit" class="btn btn-dark">저장</button>
             {% endbuttons %}
+        </form>
+    </div>
     <script>
         $('.link-formset').formset({
             addText: '목표 대학 추가',

@@ -17,7 +17,7 @@ def signup(request):
         context = {
             'form': form
         }
-        return render(request, 'user/signup.html', context)
+        return render(request, 'accounts/signup.html', context)
 
     
 def login(request):
@@ -28,7 +28,7 @@ def login(request):
         return redirect('board:index')
     else:
         form = AuthenticationForm()
-        return render(request, 'user/login.html', {'form': form})
+        return render(request, 'accounts/login.html', {'form': form})
     
     
 def logout(request):

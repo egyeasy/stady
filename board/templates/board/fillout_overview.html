@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block body %}
+<section class="page-section bg-primary" id="about">
+    <div class="container">
+        <h1>
+            내 정보
+        </h1>
+        
+        <!-- fillout nav -->
+        <!-- <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'board:fillout_school' %}">내신</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_target' %}">목표 대학</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:fillout_question' %}">Q&A</a>
+          </li>
+        </ul> -->
+
+        <h3>
+            1. 내신
+        </h3>
+        <p class="w-50">
+            <table class="table table-dark">
+                <tr>
+                    <td>1-1</td>
+                    <td>{{ schoolRecord.firstFirst }}</td>
+                    <td>1-2</td>
+                    <td>{{ schoolRecord.firstSecond }}</td>
+                </tr>
+                <tr>
+                    <td>2-1</td>
+                    <td>{{ schoolRecord.secondFirst }}</td>
+                    <td>2-2</td>
+                    <td>{{ schoolRecord.SecondSecond }}</td>
+                </tr>
+                <tr>
+                    <td>3-1</td>
+                    <td>{{ schoolRecord.thirdFirst }}</td>
+                    <td>3-2</td>
+                    <td>{{ schoolRecord.thirdSecond }}</td>
+                </tr>
+            </table>
+        </p>
+        
+        <h3>
+            2. 생활기록부
+        </h3>
+        <p class="w-50">
+            
+        </p>
+    
+        <h3>
+            3. 모의고사
+        </h3>
+        <p class="w-50">
+            
+        </p>
+    
+        <h3>
+            4. 목표 대학
+        </h3>
+        <p class="w-50">
+            
+        </p>
+    
+        <h3>
+            5. 질문
+        </h3>
+        <p class="w-50">
+            
+        </p>
+    </div>
+</section>
+{% endblock %}

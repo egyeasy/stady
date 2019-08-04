@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.forms import formset_factory
 from django.views import View
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .models import SchoolRecord, Record, Test, TargetUniv, Question
 from .forms import SchoolRecordForm, RecordForm, TestForm, TargetUnivForm, QuestionForm
 
 
@@ -57,6 +59,7 @@ def fillout_record(request):
 #         return render(request, 'board/fillout_test.html', context)
 
 
+@method_decorator(login_required, name='dispatch')
 class TestFormView(View):
     # We are creating a formset out of the TestForm
     Test_FormSet = formset_factory(TestForm)
@@ -97,7 +100,8 @@ class TestFormView(View):
 #         }
 #         return render(request, 'board/fillout_target.html', context)
 
-    
+
+@method_decorator(login_required, name='dispatch')
 class TargetUnivFormView(View):
     # We are creating a formset out of the TestForm
     Target_FormSet = formset_factory(TargetUnivForm)
@@ -112,7 +116,9 @@ class TargetUnivFormView(View):
 
     # Overiding the post method
     def post(self, request, *args, **kwargs):
+        print(self.request.POST)
         target_formset = self.Target_FormSet(self.request.POST)
+        print(target_formset)
         for target in target_formset:
             if target.is_valid():
                 # Saving in the contacts models
@@ -146,8 +152,17 @@ def fillout_question(request):
 
 @login_required
 def overview(request):
-    
+    schoolRecord = SchoolRecord.objects.get(user=request.user)
+    record = Record.objects.get(user=request.user)
+    tests = Test.objects.filter(user=request.user)
+    targetUnivs = TargetUniv.objects.filter(user=request.user)
+    questions = Question.objects.filter(user=request.user)
     context = {
-        
+        'schoolRecord': schoolRecord,
+        'record': record,
+        'tests': tests,
+        'targetUnivs': targetUnivs,
+        'questions': questions,
     }
+    print(context)
     return render(request, 'board/fillout_overview.html', context)
