@@ -35,3 +35,20 @@ def logout(request):
     auth_logout(request)
     return redirect('board:index')
 
+
+def consult_signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_staff = True
+            user.save()
+            auth_login(request, user)
+        return redirect('board:index')
+    else:
+        form = UserCreationForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'accounts/signup.html', context)
+    

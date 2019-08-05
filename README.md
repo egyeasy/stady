@@ -16,3 +16,9 @@ https://stackoverflow.com/questions/4902333/django-how-to-make-a-form-with-custo
 
 여러 form 추가/제거하기(django dynamic formset)
 https://github.com/elo80ka/django-dynamic-formset/blob/master/src/jquery.formset.js
+
+### 권한 관리
+https://heiswed.tistory.com/entry/%EC%9E%A5%EA%B3%A0Django-%EA%B0%9C%EB%B0%9C-%EA%B6%8C%ED%95%9Cpermission-%ED%99%94%EB%A9%B4-%EA%B4%80%EB%A6%AC
+
+그냥 login app에서 링크 하나 파서 같은 url로 보낼 것. request url 확인은
+https://stackoverflow.com/questions/2882490/how-to-get-the-current-url-within-a-django-template
