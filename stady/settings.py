@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'board',
     'feedback',
     'accounts',
+    'consult',
 ]
 
 MIDDLEWARE = [
