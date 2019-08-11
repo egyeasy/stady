@@ -91,7 +91,7 @@ class TestForm(forms.ModelForm):
         model = Test
         # input을 만들 칼럼 값을 list로 만들어 넣어준다.
         fields = [
-                  'user',
+                  # 'user',
                   'year',
                   'month',
                   'koreanPoint',

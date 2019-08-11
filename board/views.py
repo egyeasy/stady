@@ -66,11 +66,10 @@ def fillout_record(request):
 
 @method_decorator(login_required, name='dispatch')
 class TestFormView(View):
+    Test_FormSet = modelformset_factory(Test, form=TestForm)
     
     # Overiding the get method
     def get(self, request, *args, **kwargs):
-        # testFormset = TestFormset(request.user)
-        self.Test_FormSet = modelformset_factory(Test, form=TestForm)
         results = Test.objects.filter(user=request.user)
         # Creating an Instance of formset and putting it in context dict
         if results:
@@ -85,7 +84,6 @@ class TestFormView(View):
 
     # Overiding the post method
     def post(self, request, *args, **kwargs):
-        self.Test_FormSet = modelformset_factory(Test, form=TestForm)
         results = Test.objects.filter(user=request.user)
         if results:
             test_formset = self.Test_FormSet(request.POST, queryset=results)
