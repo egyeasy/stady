@@ -54,7 +54,7 @@ class Test(models.Model):
     foreignPoint = models.IntegerField()
     
     def __str__(self):
-        return f"{self.year} {self.month}"
+        return f"{self.year} {self.month}, {self.user}"
     
 
 class TargetUniv(models.Model):

@@ -7,7 +7,7 @@
 <section class="page-section bg-primary" id="about">
   <div class="container">
     <h1>
-        내 정보
+        내 정보 {{request.user}}
     </h1>
     
     <!-- fillout nav -->
@@ -49,6 +49,9 @@
                     </div>
                    -->
                 <div class="link-formset">
+                    <div>
+                        {{ test.user }}
+                    </div>
                     <div>
                         {{ test.year }}
                     </div>

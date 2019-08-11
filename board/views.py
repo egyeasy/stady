@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.forms import formset_factory
+from django.forms import formset_factory, modelformset_factory
+from django.forms.models import BaseModelFormSet
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -25,8 +26,12 @@ def fillout_school(request):
         return redirect('board:fillout_record')
     else:
         # 작성한 게 있을 때 가져와서 보여주기
+        results = SchoolRecord.objects.filter(user=request.user)
+        if results:
+            schoolRecordForm = SchoolRecordForm(instance=results[0])
         # 작성한 게 없으면
-        schoolRecordForm = SchoolRecordForm()
+        else:
+            schoolRecordForm = SchoolRecordForm()
         context = {
             'schoolRecordForm': schoolRecordForm,
             }
@@ -61,20 +66,31 @@ def fillout_record(request):
 
 @method_decorator(login_required, name='dispatch')
 class TestFormView(View):
-    # We are creating a formset out of the TestForm
-    Test_FormSet = formset_factory(TestForm)
-
+    
     # Overiding the get method
     def get(self, request, *args, **kwargs):
+        # testFormset = TestFormset(request.user)
+        self.Test_FormSet = modelformset_factory(Test, form=TestForm)
+        results = Test.objects.filter(user=request.user)
         # Creating an Instance of formset and putting it in context dict
-        context = {
-                'test_form': self.Test_FormSet(),
-                }
+        if results:
+            context = {
+                'test_form': self.Test_FormSet(queryset=results)
+            }
+        else:
+            context = {
+                'test_form': self.Test_FormSet(queryset=Test.objects.none()),
+            }
         return render(request, 'board/fillout_test.html', context)
 
     # Overiding the post method
     def post(self, request, *args, **kwargs):
-        test_formset = self.Test_FormSet(self.request.POST)
+        self.Test_FormSet = modelformset_factory(Test, form=TestForm)
+        results = Test.objects.filter(user=request.user)
+        if results:
+            test_formset = self.Test_FormSet(request.POST, queryset=results)
+        else:
+            test_formset = self.Test_FormSet(request.POST)
         for test in test_formset:
             if test.is_valid():
                 # Saving in the contacts models
@@ -82,8 +98,14 @@ class TestFormView(View):
                 form.user = request.user
                 form.save()
             else:
-                context = {
-                        'test_form': self.Test_FormSet(),
+                print("not valid, result:", results)
+                if results:
+                    context = {
+                        'test_form': self.Test_FormSet(queryset=results),
+                    }
+                else:
+                    context = {
+                        'test_form': self.Test_FormSet(queryset=Test.objects.none()),
                     }
                 return render(request, 'board/fillout_test.html', context)
         return redirect('board:fillout_target')
