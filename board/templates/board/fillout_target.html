@@ -38,12 +38,15 @@
     <div>
         <form method="POST">
             {% csrf_token %}
-              <!-- <fieldset>
-              <div> -->
+              <fieldset>
+              <div>
                 {{ formset.management_form }}
-            <div>
+            <!-- <div> -->
                 
                 {% for form in formset %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
                 <div class="link-formset">
                     <table class="table table-dark">
                       <thead>
@@ -65,9 +68,9 @@
                     </table>
                 </div> 
                 {% endfor %}
-            </div>
-              <!-- </div>
-            </fieldset> -->
+            <!-- </div> -->
+              </div>
+            </fieldset>
             
             {% buttons %}
                 <button type="submit" class="btn btn-dark">저장</button>
@@ -75,10 +78,10 @@
         </form>
     </div>
     <script>
-        $('.link-formset').formset({
-            addText: '목표 대학 추가',
-            deleteText: '목표 대학 제거'
-        });
+        // $('.link-formset').formset({
+        //     addText: '목표 대학 추가',
+        //     deleteText: '목표 대학 제거'
+        // });
     </script>
    
   </div>
