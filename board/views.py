@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.forms import formset_factory, modelformset_factory
+from django.forms import formset_factory, modelformset_factory, inlineformset_factory
 from django.forms.models import BaseModelFormSet
 from django.views import View
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import SchoolRecord, Record, Test, TargetUniv, Question
@@ -52,24 +53,14 @@ def fillout_record(request):
         'recordForm': recordForm,
     }
     return render(request, 'board/fillout_record.html', context)
-    
-# def fillout_test(request):
-#     if request.method == "POST":
-#         pass
-#     else:
-#         testForm = TestForm()
-#         context = {
-#             'testForm': testForm,
-#         }
-#         return render(request, 'board/fillout_test.html', context)
 
 
 @method_decorator(login_required, name='dispatch')
 class TestFormView(View):
-    Test_FormSet = modelformset_factory(Test, form=TestForm)
     
     # Overiding the get method
     def get(self, request, *args, **kwargs):
+        self.Test_FormSet = modelformset_factory(Test, form=TestForm)
         results = Test.objects.filter(user=request.user)
         # Creating an Instance of formset and putting it in context dict
         if results:
@@ -86,8 +77,10 @@ class TestFormView(View):
     def post(self, request, *args, **kwargs):
         results = Test.objects.filter(user=request.user)
         if results:
+            self.Test_FormSet = modelformset_factory(Test, form=TestForm)
             test_formset = self.Test_FormSet(request.POST, queryset=results)
         else:
+            self.Test_FormSet = modelformset_factory(Test, form=TestForm)
             test_formset = self.Test_FormSet(request.POST)
         for test in test_formset:
             if test.is_valid():
@@ -107,38 +100,44 @@ class TestFormView(View):
                     }
                 return render(request, 'board/fillout_test.html', context)
         return redirect('board:fillout_target')
-            
-
-# @login_required
-# def fillout_target(request):
-#     if request.method == "POST":
-#         pass
-#     else:
-#         targetUnivForm = TargetUnivForm()
-#         context = {
-#             'targetUnivForm': targetUnivForm,
-#         }
-#         return render(request, 'board/fillout_target.html', context)
 
 
 @method_decorator(login_required, name='dispatch')
 class TargetUnivFormView(View):
     # We are creating a formset out of the TestForm
-    Target_FormSet = formset_factory(TargetUnivForm)
-
+    Target_FormSet = modelformset_factory(TargetUniv, form=TargetUnivForm)
+    
     # Overiding the get method
     def get(self, request, *args, **kwargs):
+        results = TargetUniv.objects.filter(user=request.user)
         # Creating an Instance of formset and putting it in context dict
-        context = {
-                'target_form': self.Target_FormSet(),
-                }
+        if results:
+            context = {
+                    'formset': self.Target_FormSet(queryset=results),
+                    }
+        else:
+            context = {
+                    'formset': self.Target_FormSet(queryset=TargetUniv.objects.none()),
+                    }
         return render(request, 'board/fillout_target.html', context)
 
     # Overiding the post method
     def post(self, request, *args, **kwargs):
-        print(self.request.POST)
-        target_formset = self.Target_FormSet(self.request.POST)
-        print(target_formset)
+        results = TargetUniv.objects.filter(user=request.user)
+        if results:
+            User = request.user
+            self.Target_FormSet = inlineformset_factory(get_user_model(), TargetUniv, form=TargetUnivForm)
+            target_formset = self.Target_FormSet(request.POST, instance=User)
+            # print("user: ", type(User), User, type(get_user_model()), get_user_model())
+            # print(type(TargetUniv.objects.filter(user=request.user)[0]), TargetUniv.objects.filter(user=request.user)[0])
+            # print(type(target_formset))
+            if target_formset.is_valid():
+                target_formset.save()
+                return redirect('board:fillout_question')
+            else:
+                return redirect('board:fillout_target')
+        else:
+            target_formset = self.Target_FormSet(request.POST)
         for target in target_formset:
             if target.is_valid():
                 # Saving in the contacts models
@@ -146,10 +145,12 @@ class TargetUnivFormView(View):
                 form.user = request.user
                 form.save()
             else:
+                print("target invalid")
                 context = {
-                        'target_form': self.Target_FormSet(),
+                        'formset': self.Target_FormSet(queryset=TargetUniv.objects.none()),
                     }
                 return render(request, 'board/fillout_target.html', context)
+        # results.delete()
         return redirect('board:fillout_question')
 
     

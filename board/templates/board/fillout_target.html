@@ -38,10 +38,12 @@
     <div>
         <form method="POST">
             {% csrf_token %}
-              <fieldset>
-              <div>
-                {{ target_form.management_form }}
-                {% for target in target_form %}
+              <!-- <fieldset>
+              <div> -->
+                {{ formset.management_form }}
+            <div>
+                
+                {% for form in formset %}
                 <div class="link-formset">
                     <table class="table table-dark">
                       <thead>
@@ -54,17 +56,18 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">{{ target.order }}</th>
-                          <td>{{ target.univ }}</td>
-                          <td>{{ target.major }}</td>
-                          <td>{{ target.applyType }}</td>
+                          <th scope="row">{{ form.order }}</th>
+                          <td>{{ form.univ }}</td>
+                          <td>{{ form.major }}</td>
+                          <td>{{ form.applyType }}</td>
                         </tr>
                       </tbody>
                     </table>
                 </div> 
                 {% endfor %}
-              </div>
-            </fieldset>
+            </div>
+              <!-- </div>
+            </fieldset> -->
             
             {% buttons %}
                 <button type="submit" class="btn btn-dark">저장</button>
