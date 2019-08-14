@@ -110,53 +110,21 @@ class TargetUnivFormView(View):
     
     # Overiding the get method
     def get(self, request, *args, **kwargs):
-        results = TargetUniv.objects.filter(user=request.user)
-        # Creating an Instance of formset and putting it in context dict
-        if results:
-            context = {
-                    'formset': self.Target_FormSet(instance=request.user),
-                    }
-        else:
-            context = {
-                    'formset': self.Target_FormSet(instance=request.user),
-                    # 'formset': self.Target_FormSet(queryset=TargetUniv.objects.none()),
-                    }
+        context = {
+                'formset': self.Target_FormSet(instance=request.user),
+                }
         return render(request, 'board/fillout_target.html', context)
 
     # Overiding the post method
     def post(self, request, *args, **kwargs):
-        results = TargetUniv.objects.filter(user=request.user)
-        if results:
-            (print("result 있다"))
-            User = request.user
-            # self.Target_FormSet = inlineformset_factory(get_user_model(), TargetUniv, form=TargetUnivForm)
-            target_formset = self.Target_FormSet(request.POST, instance=User)
-            # print("user: ", type(User), User, type(get_user_model()), get_user_model())
-            # print(type(TargetUniv.objects.filter(user=request.user)[0]), TargetUniv.objects.filter(user=request.user)[0])
-            # print(type(target_formset))
-        else:
-            print("result 없다")
-            target_formset = self.Target_FormSet(request.POST, instance=request.user)
+        target_formset = self.Target_FormSet(request.POST, instance=request.user)
         
         if target_formset.is_valid():
             target_formset.save()
             return redirect('board:fillout_question')
         else:
-            print("invalid 하다")
             errors = target_formset.errors
             print(errors)
-        # for target in target_formset:
-        #     if target.is_valid():
-        #         # Saving in the contacts models
-        #         form = target.save(commit=False)
-        #         form.user = request.user
-        #         form.save()
-        #     else:
-        #         print("target invalid")
-        #         context = {
-        #                 'formset': self.Target_FormSet(queryset=TargetUniv.objects.none()),
-        #             }
-        #         return render(request, 'board/fillout_target.html', context)
             return redirect('board:fillout_target')
 
     
