@@ -142,3 +142,6 @@ django_heroku.settings(locals())
 
 # customize user
 AUTH_USER_MODEL = 'accounts.User'
+
+# django-simple-email-confirmation - key length setting
+SIMPLE_EMAIL_CONFIRMATION_KEY_LENGTH = 8
