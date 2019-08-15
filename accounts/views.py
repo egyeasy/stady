@@ -11,6 +11,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
+        else:
+            errors = form.errors
+            print(errors)
+            return redirect('accounts:signup.html')
         return redirect('board:index')
     else:
         form = CustomUserCreationForm()
