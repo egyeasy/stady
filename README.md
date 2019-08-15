@@ -25,3 +25,6 @@ https://heiswed.tistory.com/entry/%EC%9E%A5%EA%B3%A0Django-%EA%B0%9C%EB%B0%9C-%E
 
 그냥 login app에서 링크 하나 파서 같은 url로 보낼 것. request url 확인은
 https://stackoverflow.com/questions/2882490/how-to-get-the-current-url-within-a-django-template
+
+### 이메일 인증
+https://stackoverflow.com/questions/24935271/django-custom-user-email-account-verification

@@ -140,4 +140,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 django_heroku.settings(locals())
 
 # customize user
-# AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'accounts.User'
