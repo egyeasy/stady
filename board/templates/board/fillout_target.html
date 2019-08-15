@@ -41,8 +41,6 @@
               <fieldset>
               <div>
                 {{ formset.management_form }}
-            <!-- <div> -->
-                
                 {% for form in formset %}
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
@@ -66,9 +64,11 @@
                         </tr>
                       </tbody>
                     </table>
-                </div> 
+                    {% if formset.can_delete %}
+                        <li>{{ form.DELETE }}</li>
+                    {% endif %}
+                </div>
                 {% endfor %}
-            <!-- </div> -->
               </div>
             </fieldset>
             

@@ -114,9 +114,9 @@ class TestForm(forms.ModelForm):
         
 class TargetUnivForm(forms.ModelForm):
     # order = forms.IntegerField()
-    univ = forms.CharField(max_length=30)
-    major = forms.CharField(max_length=30)
-    applyType = forms.CharField(max_length=30)
+    univ = forms.CharField(max_length=30, required=False)
+    major = forms.CharField(max_length=30, required=False)
+    applyType = forms.CharField(max_length=30, required=False)
     
     class Meta:
         model = TargetUniv

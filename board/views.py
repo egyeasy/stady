@@ -57,56 +57,35 @@ def fillout_record(request):
 
 @method_decorator(login_required, name='dispatch')
 class TestFormView(View):
+    Test_FormSet = inlineformset_factory(get_user_model(), Test, form=TestForm, extra=1)
     
     # Overiding the get method
     def get(self, request, *args, **kwargs):
-        self.Test_FormSet = modelformset_factory(Test, form=TestForm)
         results = Test.objects.filter(user=request.user)
-        # Creating an Instance of formset and putting it in context dict
-        if results:
-            context = {
-                'test_form': self.Test_FormSet(queryset=results)
-            }
-        else:
-            context = {
-                'test_form': self.Test_FormSet(queryset=Test.objects.none()),
+        context = {
+                'formset': self.Test_FormSet(instance=request.user),
             }
         return render(request, 'board/fillout_test.html', context)
 
     # Overiding the post method
     def post(self, request, *args, **kwargs):
-        results = Test.objects.filter(user=request.user)
-        if results:
-            self.Test_FormSet = modelformset_factory(Test, form=TestForm)
-            test_formset = self.Test_FormSet(request.POST, queryset=results)
+        test_formset = self.Test_FormSet(request.POST, instance=request.user)
+        print(test_formset)
+        print(" ")
+        print(request.POST)
+        if test_formset.is_valid():
+            test_formset.save()
+            return redirect('board:fillout_target')
         else:
-            self.Test_FormSet = modelformset_factory(Test, form=TestForm)
-            test_formset = self.Test_FormSet(request.POST)
-        for test in test_formset:
-            if test.is_valid():
-                # Saving in the contacts models
-                form = test.save(commit=False)
-                form.user = request.user
-                form.save()
-            else:
-                print("not valid, result:", results)
-                if results:
-                    context = {
-                        'test_form': self.Test_FormSet(queryset=results),
-                    }
-                else:
-                    context = {
-                        'test_form': self.Test_FormSet(queryset=Test.objects.none()),
-                    }
-                return render(request, 'board/fillout_test.html', context)
-        return redirect('board:fillout_target')
+            errors = test_formset.errors
+            print(errors)
+            return redirect('board:fillout_test')
 
 
 @method_decorator(login_required, name='dispatch')
 class TargetUnivFormView(View):
     # We are creating a formset out of the TestForm
-    # Target_FormSet = modelformset_factory(TargetUniv, form=TargetUnivForm)
-    Target_FormSet = inlineformset_factory(get_user_model(), TargetUniv, form=TargetUnivForm, max_num=3)
+    Target_FormSet = inlineformset_factory(get_user_model(), TargetUniv, form=TargetUnivForm, min_num=3, extra=0)
     
     # Overiding the get method
     def get(self, request, *args, **kwargs):

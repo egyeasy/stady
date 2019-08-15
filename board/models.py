@@ -34,24 +34,24 @@ class Test(models.Model):
                  ("생물 I", "생물 I"), ("생물 II", "생물 II"), ("지구과학 I", "지구과학 I"), ("지구과학 II", "지구과학 II"))
     FOREIGN_GROUP = (("중국어", "중국어"), ("일본어", "일본어"), ("독일어", "독일어"), ("프랑스어", "프랑스어"), ("스페인어", "스페인어"),
                      ("러시아어", "러시아어"), ("아랍어", "아랍어"), ("베트남어", "베트남어"), ("한문", "한문"),)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    year = models.IntegerField(choices=YEAR_GROUP, verbose_name="연도")
-    month = models.IntegerField(choices=MONTH_GROUP, verbose_name="월")
-    koreanPoint = models.IntegerField()
-    koreanGrade = models.IntegerField(choices=GRADE_GROUP)
-    mathPoint = models.IntegerField()
-    mathGrade = models.IntegerField(choices=GRADE_GROUP)
-    englishPoint = models.IntegerField()
-    englishGrade = models.IntegerField(choices=GRADE_GROUP)
-    tamguFirstName = models.CharField(max_length=20, choices=TAMGU_GROUP, verbose_name="탐구1")
-    tamguFirstGrade = models.IntegerField(choices=GRADE_GROUP)
-    tamguFirstPoint = models.IntegerField()
-    tamguSecondName = models.CharField(max_length=20, choices=TAMGU_GROUP, verbose_name="탐구2")
-    tamguSecondGrade = models.IntegerField(choices=GRADE_GROUP)
-    tamguSecondPoint = models.IntegerField()
-    foreignName = models.CharField(max_length=20, choices=FOREIGN_GROUP, verbose_name="제2외국어")
-    foreignGrade = models.IntegerField(choices=GRADE_GROUP)
-    foreignPoint = models.IntegerField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+    year = models.IntegerField(choices=YEAR_GROUP, verbose_name="연도", blank=True)
+    month = models.IntegerField(choices=MONTH_GROUP, verbose_name="월", blank=True)
+    koreanPoint = models.IntegerField(blank=True)
+    koreanGrade = models.IntegerField(choices=GRADE_GROUP, blank=True)
+    mathPoint = models.IntegerField(blank=True)
+    mathGrade = models.IntegerField(choices=GRADE_GROUP, blank=True)
+    englishPoint = models.IntegerField(blank=True)
+    englishGrade = models.IntegerField(choices=GRADE_GROUP, blank=True)
+    tamguFirstName = models.CharField(max_length=20, choices=TAMGU_GROUP, verbose_name="탐구1", blank=True)
+    tamguFirstGrade = models.IntegerField(choices=GRADE_GROUP, blank=True)
+    tamguFirstPoint = models.IntegerField(blank=True)
+    tamguSecondName = models.CharField(max_length=20, choices=TAMGU_GROUP, verbose_name="탐구2", blank=True)
+    tamguSecondGrade = models.IntegerField(choices=GRADE_GROUP, blank=True)
+    tamguSecondPoint = models.IntegerField(blank=True)
+    foreignName = models.CharField(max_length=20, choices=FOREIGN_GROUP, verbose_name="제2외국어", blank=True)
+    foreignGrade = models.IntegerField(choices=GRADE_GROUP, blank=True)
+    foreignPoint = models.IntegerField(blank=True)
     
     def __str__(self):
         return f"{self.year} {self.month}, {self.user}"
@@ -60,13 +60,13 @@ class Test(models.Model):
 class TargetUniv(models.Model):
     ORDER_GROUP = ((1, 1), (2, 2), (3, 3))
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    order = models.IntegerField(choices=ORDER_GROUP, verbose_name="지망 순위")
-    univ = models.CharField(max_length=30)
-    major = models.CharField(max_length=30)
-    applyType = models.CharField(max_length=30)
+    order = models.IntegerField(choices=ORDER_GROUP, verbose_name="지망 순위", blank=True)
+    univ = models.CharField(max_length=30, blank=True)
+    major = models.CharField(max_length=30, blank=True)
+    applyType = models.CharField(max_length=30, blank=True)
     
     def __str__(self):
-        return self.univ + " " + self.major
+        return self.univ + " " + self.major + ", " + str(self.user)
     
 # class StudyHour(models.Model):
 #     content = models.CharField(max_length=140)
