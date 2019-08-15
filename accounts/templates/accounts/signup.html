@@ -7,6 +7,7 @@
 <form method="POST">
   {% csrf_token %}
   {% bootstrap_form form %}
+  {{ form.media.js }}
   {% buttons %}
     <button type="submit" class="btn btn-primary">회원가입</button>
   {% endbuttons %}

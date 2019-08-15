@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import url
 
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('manage/', include('manage.urls')),
     path('feedback/', include('feedback.urls')),
     path('accounts/', include('accounts.urls')),
+    url(r'^verified-email-field/', include('verified_email_field.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
