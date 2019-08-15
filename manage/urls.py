@@ -4,8 +4,8 @@ from . import views
 app_name = "manage"
 
 urlpatterns = [
-    path('student-list/', views.student_list, name="student_list"),
-    # path('fillout-school/', views.fillout_school, name="fillout_school"),
+    path('students/', views.student_list, name="student_list"),
+    path('students/<str:student_email>', views.overview, name="overview"),
     # path('fillout-record/', views.fillout_record, name="fillout_record"),
 	# path('fillout-test', views.fillout_test, name="fillout_test"),
 	# path('fillout-test/', views.TestFormView.as_view(), name="fillout_test"),

@@ -58,6 +58,7 @@ class SchoolRecordForm(forms.ModelForm):
         
 
 class RecordForm(forms.ModelForm):
+    file = forms.FileField(label='')
     class Meta:
         model = Record
         fields = [
