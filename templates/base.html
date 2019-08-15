@@ -47,6 +47,11 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
             {% if user.is_authenticated %}
+              {% if user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'manage:student_list' %}">학생 관리</a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="{% url 'accounts:logout' %}">로그아웃</a>
               </li>
