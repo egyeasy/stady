@@ -13,7 +13,7 @@ class User(AbstractUser):
     school = models.CharField(max_length=30, blank=True, verbose_name="학교")
     grade = models.IntegerField(null=True, verbose_name="학년")
     is_payed = models.BooleanField(null=True, verbose_name="결제 여부")
-    # is_feedbacked = models.BooleanField(null=True, verbose_name="피드백 여부")
+    is_feedbacked = models.BooleanField(null=True, verbose_name="피드백 여부")
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
