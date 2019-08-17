@@ -22,6 +22,7 @@ def overview(request, student_email):
     targetUnivs = TargetUniv.objects.filter(user=user).order_by('order')
     question = Question.objects.get(user=user)
     context = {
+        'student': user,
         'schoolRecord': schoolRecord,
         'recordForm': recordForm,
         'tests': tests,
@@ -29,3 +30,11 @@ def overview(request, student_email):
         'question': question,
     }
     return render(request, 'manage/overview.html', context)
+
+
+def feedback(request, student_email):
+    
+    context = {
+        
+    }
+    return render(request, 'manage/feedback.html', context)
