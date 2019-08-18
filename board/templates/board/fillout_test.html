@@ -4,137 +4,142 @@
 {% load bootstrap4 %}
 
 {% block body %}
-<section class="page-section bg-primary" id="about">
-  <div class="container">
-    <h1>
-        내 정보
-    </h1>
-    
-    <!-- fillout nav -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_school' %}">내신</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'board:fillout_test' %}">모의고사</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_target' %}">목표 대학</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_question' %}">Q&A</a>
-      </li>
-    </ul>
+<section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="mt-0 text-center">내 정보</h2>
+          <hr class="divider my-4">
+            <!-- fillout nav -->
+            <ul class="nav nav-tabs mb-4">
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_school' %}">내신</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_record' %}">생활기록부</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini active" href="{% url 'board:fillout_test' %}">모의고사</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_target' %}">목표 대학</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_question' %}">Q&A</a>
+              </li>
+            </ul>
 
-    <h3>
-        3. 모의고사
-    </h3>
-     
-    <div>
-        <form method="POST">
-            {% csrf_token %}
-              <fieldset>
-              <div>
-                {{ formset.management_form }}
-                {% for form in formset %}
-                    {% for hidden in form.hidden_fields %}
-                        {{ hidden }}
+            <h3>
+                3. 모의고사
+            </h3>
+            <div class="mb-2">
+                모의고사 성적을 입력해주세요.
+            </div>
+            <div>
+                (표 추가/삭제 시 표 아래의 버튼을 클릭하세요)
+            </div>
+        </div>
+      </div>
+        
+        <div class="w-100 mx-auto">
+            <form method="POST">
+                {% csrf_token %}
+                  <fieldset>
+                  <div>
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                        {% for hidden in form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
+                    <div class="link-formset">
+                        <p class="mt-5">
+                            연도 {{ form.year }}
+                        </p>
+                        <p>
+                            월 {{ form.month }}
+                        </p>
+                        <table class="table table-dark mx-auto">
+                          <thead>
+                            <tr>
+                              <th scope="col">과목명</th>
+                              <th scope="col" colspan="2">국어</th>
+                              <th scope="col" colspan="2">수학</th>
+                              <th scope="col" colspan="2">영어</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>등급</td>
+                              <td>원점수</td>
+                              <td>등급</td>
+                              <td>원점수</td>
+                              <td>등급</td>
+                              <td>원점수</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td><div>{{ form.koreanGrade }}</div></td>
+                              <td><div>{{ form.koreanPoint }}</div></td>
+                              <td><div>{{ form.mathGrade }}</div></td>
+                              <td><div>{{ form.mathPoint }}</div></td>
+                              <td><div>{{ form.englishGrade }}</div></td>
+                              <td><div>{{ form.englishPoint }}</div></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table class="table table-dark">
+                          <thead>
+                            <tr>
+                              <th scope="col">과목명</th>
+                              <th scope="col">탐구1</th>
+                              <th scope="col">{{ form.tamguFirstName }}</th>
+                              <th scope="col">탐구2</th>
+                              <th scope="col">{{ form.tamguSecondName }}</th>
+                              <th scope="col">제2외국어</th>
+                              <th scope="col">{{ form.foreignName }}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>등급</td>
+                              <td>원점수</td>
+                              <td>등급</td>
+                              <td>원점수</td>
+                              <td>등급</td>
+                              <td>원점수</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td><div>{{ form.tamguFirstGrade }}</div></td>
+                              <td><div>{{ form.tamguFirstPoint }}</div></td>
+                              <td><div>{{ form.tamguSecondGrade }}</div></td>
+                              <td><div>{{ form.tamguSecondPoint }}</div></td>
+                              <td><div>{{ form.foreignGrade }}</div></td>
+                              <td><div>{{ form.foreignPoint }}</div></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
                     {% endfor %}
-                <div class="link-formset">
-                    <div>
-                        {{ form.user }}
-                    </div>
-                    <div>
-                        {{ form.year }}
-                    </div>
-                    <div>
-                        {{ form.month }}
-                    </div>
-                    <table class="table table-dark">
-                      <thead>
-                        <tr>
-                          <th scope="col">과목명</th>
-                          <th scope="col" colspan="2">국어</th>
-                          <th scope="col" colspan="2">수학</th>
-                          <th scope="col" colspan="2">영어</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                          <td>등급</td>
-                          <td>원점수</td>
-                          <td>등급</td>
-                          <td>원점수</td>
-                          <td>등급</td>
-                          <td>원점수</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          <td><div>{{ form.koreanGrade }}</div></td>
-                          <td><div>{{ form.koreanPoint }}</div></td>
-                          <td><div>{{ form.mathGrade }}</div></td>
-                          <td><div>{{ form.mathPoint }}</div></td>
-                          <td><div>{{ form.englishGrade }}</div></td>
-                          <td><div>{{ form.englishPoint }}</div></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table class="table table-dark">
-                      <thead>
-                        <tr>
-                          <th scope="col">과목명</th>
-                          <th scope="col">탐구1</th>
-                          <th scope="col">{{ form.tamguFirstName }}</th>
-                          <th scope="col">탐구2</th>
-                          <th scope="col">{{ form.tamguSecondName }}</th>
-                          <th scope="col">제2외국어</th>
-                          <th scope="col">{{ form.foreignName }}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                          <td>등급</td>
-                          <td>원점수</td>
-                          <td>등급</td>
-                          <td>원점수</td>
-                          <td>등급</td>
-                          <td>원점수</td>
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          <td><div>{{ form.tamguFirstGrade }}</div></td>
-                          <td><div>{{ form.tamguFirstPoint }}</div></td>
-                          <td><div>{{ form.tamguSecondGrade }}</div></td>
-                          <td><div>{{ form.tamguSecondPoint }}</div></td>
-                          <td><div>{{ form.foreignGrade }}</div></td>
-                          <td><div>{{ form.foreignPoint }}</div></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
-                {% endfor %}
-              </div>
-            </fieldset>
-            
-            {% buttons %}
-                <button type="submit" class="btn btn-dark">저장</button>
-            {% endbuttons %}
-        </form>
+                  </div>
+                </fieldset>
+
+                {% buttons %}
+                    <button type="submit" class="btn btn-dark">저장</button>
+                {% endbuttons %}
+            </form>
+        </div>
+        <script>
+            $('.link-formset').formset({
+                addText: '성적 추가',
+                deleteText: '성적 삭제'
+            });
+        </script>
+        
     </div>
-    <script>
-        $('.link-formset').formset({
-            addText: 'Add Test',
-            deleteText: 'Remove Test'
-        });
-    </script>
-    
-      
-  </div>
 </section>
+
 {% endblock %}
 

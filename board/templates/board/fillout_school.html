@@ -5,65 +5,51 @@
 
 
 {% block body %}
-<section class="page-section bg-primary" id="about">
-    <div class="container">
-        <h1>
-            내 정보
-        </h1>
-        
-        <!-- fillout nav -->
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" href="{% url 'board:fillout_school' %}">내신</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'board:fillout_target' %}">목표 대학</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'board:fillout_question' %}">Q&A</a>
-          </li>
-        </ul>
-
-        <h3>
-            1. 내신
-        </h3>
-        <div>
-            학기별 내신 등급을 소수점 둘째 자리에서 반올림해서 입력해주세요.
-        </div>
-        <div>
-            (예: 1학년 1학기 4.33)      
-        </div>
-        <p class="w-50">
-            <form class="w-50" method="POST">
-                {% csrf_token %}
-                {{ schoolRecordForm.as_table }}
-                {% buttons %}
-                    <button type="submit" class="btn btn-dark">저장</button>
-                {% endbuttons %}
-
-            </form>
-        </p>
-    </div>
-</section>
-{% endblock %}
-
-
-  <!-- About Section -->
-  <!-- <section class="page-section bg-primary" id="about">
+<section class="page-section" id="contact">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="text-white mt-0">We've got what you need!</h2>
-          <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+        <div class="col-lg-8">
+          <h2 class="mt-0 text-center">내 정보</h2>
+          <hr class="divider my-4">
+            <!-- fillout nav -->
+            <ul class="nav nav-tabs mb-4">
+              <li class="nav-item">
+                <a class="nav-link active nav-mini" href="{% url 'board:fillout_school' %}">내신</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_record' %}">생활기록부</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_test' %}">모의고사</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_target' %}">목표 대학</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_question' %}">Q&A</a>
+              </li>
+            </ul>
+
+            <h3>
+                1. 내신
+            </h3>
+            <div class="mb-2">
+                학기별 내신 등급을 소수점 둘째 자리에서 반올림해서 입력해주세요.
+            </div>
+            <div>
+                (예: 1학년 1학기 4.33)      
+            </div>
+            <p>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ schoolRecordForm.as_p }}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-dark">저장</button>
+                    {% endbuttons %}
+                </form>
+            </p>
         </div>
       </div>
     </div>
-  </section> -->
+</section>
+{% endblock %}

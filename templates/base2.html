@@ -1,7 +1,6 @@
 {% load staticfiles %}
-{% load static %}
 <!DOCTYPE html>
-<html lang="en" data-media-url="{% get_media_prefix %}">
+<html lang="en">
 
 <head>
 
@@ -37,26 +36,10 @@
   
     <!--  custom css  -->
   <style>
-      .bg-primary {
-          background-color: white !important;
-      }
-      .nav-mini {
-          color: #495057 !important;
-      }
-      .add-row, .delete-row {
-          color: #495057 !important;
-          display: block;
-          margin-top: 20px !important;
-          margin-bottom: 20px !important;
-      }
+    .bg-primary {
+      background-color: white !important;
+    }
   </style>
-    {% if request.path != '/' %}
-        <style>
-            .navbar-not-main {
-                color: #212529 !important;
-            }
-        </style>
-    {% endif %}
 </head>
 
 <body id="page-top">
@@ -64,7 +47,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger navbar-not-main" href="{% url 'board:index' %}">Stady</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Stady</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -74,30 +57,30 @@
               {% if user.is_staff %}
               <li class="nav-item">
                   <a class="nav-link js-scroll-trigger" href="{% url 'manage:student_list' %}">
-                      <h5 class="navbar-not-main">학생 관리</h5>
+                      <h5>학생 관리</h5>
                   </a>
               </li>
               {% else %}
               <li class="nav-item">
                   <a class="nav-link js-scroll-trigger" href="{% url 'board:overview' %}">
-                      <h5 class="navbar-not-main">입력한 정보</h5>
+                      <h5>입력한 정보</h5>
                   </a>
               </li>
               {% endif %}
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="{% url 'accounts:logout' %}">
-                    <h5 class="navbar-not-main">로그아웃</h5>
+                    <h5>로그아웃</h5>
                 </a>
               </li>
             {% else %}
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="{% url 'accounts:login' %}">
-                    <h5 class="navbar-not-main">로그인</h5>
+                    <h5>로그인</h5>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="{% url 'accounts:signup' %}">
-                    <h5 class="navbar-not-main">회원가입</h5>
+                    <h5>회원가입</h5>
                 </a>
               </li>
             {% endif %}
@@ -112,7 +95,7 @@
   {% endblock %}
 
   <!-- About Section -->
-  <!-- <section class="page-section bg-primary" id="about">
+  <section class="page-section bg-primary" id="about">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
@@ -123,13 +106,13 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
       {% block body %}
       
       {% endblock %}
   <!-- Services Section -->
-  <!-- <section class="page-section" id="services">
+  <section class="page-section" id="services">
     <div class="container">
       <h2 class="text-center mt-0">At Your Service</h2>
       <hr class="divider my-4">
@@ -164,10 +147,10 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <!-- Portfolio Section -->
-  <!-- <section id="portfolio">
+  <section id="portfolio">
     <div class="container-fluid p-0">
       <div class="row no-gutters">
         <div class="col-lg-4 col-sm-6">
@@ -250,18 +233,18 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <!-- Call to Action Section -->
-  <!-- <section class="page-section bg-dark text-white">
+  <section class="page-section bg-dark text-white">
     <div class="container text-center">
       <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
       <a class="btn btn-light btn-xl" href="https://startbootstrap.com/themes/creative/">Download Now!</a>
     </div>
-  </section> -->
+  </section>
 
   <!-- Contact Section -->
-  <!-- <section class="page-section" id="contact">
+  <section class="page-section" id="contact">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
@@ -282,13 +265,13 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <!-- Footer -->
-  <footer class="bg-light py-3 mb-0">
+  <footer class="bg-light py-3">
       <div class="container d-flex align-items-start">
           <div class="d-inline-block mx-4">
-              <a class="navbar-brand js-scroll-trigger text-muted" href="{% url 'board:index' %}">Stady</a>
+              <a class="navbar-brand js-scroll-trigger text-muted" href="#page-top">Stady</a>
           </div>
           <div class="d-inline-block pt-1">
               <!-- <div class="small text-center text-muted">Copyright &copy; 2019 - Stady</div> -->

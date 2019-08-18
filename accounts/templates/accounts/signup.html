@@ -3,13 +3,22 @@
 {% load bootstrap4 %}
 
 {% block body %}
-<h1>회원가입</h1>
-<form method="POST">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  {{ form.media.js }}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">회원가입</button>
-  {% endbuttons %}
-</form>
+<section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5">
+          <h2 class="mt-0 text-center">회원가입</h2>
+          <hr class="divider my-4">
+            <form method="POST">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {{ form.media.js }}
+              {% buttons %}
+                <button type="submit" class="btn btn-primary">회원가입</button>
+              {% endbuttons %}
+            </form>            
+        </div>
+      </div>
+    </div>
+</section>
 {% endblock %}

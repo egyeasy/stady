@@ -48,7 +48,11 @@ def fillout_record(request):
             form.user = request.user
             form.save()
             return redirect('board:fillout_test')
-    recordForm = RecordForm()
+    results = Record.objects.filter(user=request.user)
+    if results:
+        recordForm = RecordForm(instance=results[0])
+    else:
+        recordForm = RecordForm()
     context = {
         'recordForm': recordForm,
     }

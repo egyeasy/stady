@@ -3,70 +3,72 @@
 {% load bootstrap4 %}
 
 {% block body %}
-<section class="page-section bg-primary" id="about">
-  <div class="container">
-    <h1>
-        내 정보
-    </h1>
-      
-    <!-- fillout nav -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_school' %}">내신</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_record' %}">생활기록부</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_test' %}">모의고사</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'board:fillout_target' %}">목표 대학</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'board:fillout_question' %}">Q&A</a>
-      </li>
-    </ul>
-    
-    <h3>
-    5. Q & A
-    </h3>
-    {% if questions %}
-        {% for question in questions %}
-            {% if question.is_staff %}
-                <div class="w-50 ml-auto">
-                    <h4>
-                        컨설턴트
-                    </h4>
-                    <div class="form-group">
-                        <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
-                    </div>
-                </div>
-            {% else %}
-                <div class="w-50 mr-auto">
-                    <h4>
-                        {{ user.username }}
-                    </h4>
-                    <div class="form-group">
-                        <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        <div>
-            입력한 데이터가 없습니다.    
+<section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="mt-0 text-center">내 정보</h2>
+          <hr class="divider my-4">
+            <!-- fillout nav -->
+            <ul class="nav nav-tabs mb-4">
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_school' %}">내신</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_record' %}">생활기록부</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_test' %}">모의고사</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_target' %}">목표 대학</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini active" href="{% url 'board:fillout_question' %}">Q&A</a>
+              </li>
+            </ul>
+
+            <h3>
+                5. Q & A
+            </h3>
+            <div class="mb-5">
+                궁금한 사항을 질문하고 답변을 확인하세요.
+            </div>
+            <p>
+                {% if questions %}
+                    {% for question in questions %}
+                        {% if question.is_staff %}
+                            <div class="w-50 ml-auto">
+                                <h4>
+                                    컨설턴트
+                                </h4>
+                                <div class="form-group">
+                                    <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="w-50 mr-auto">
+                                <h4>
+                                    {{ user.username }}
+                                </h4>
+                                <div class="form-group">
+                                    <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form questionForm %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-dark">저장</button>
+                    {% endbuttons %}
+                </form>
+            </p>
         </div>
-    {% endif %}
-      
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form questionForm %}
-        {% buttons %}
-            <button type="submit" class="btn btn-dark">저장</button>
-        {% endbuttons %}
-    </form>
-   
-  </div>
+      </div>
+    </div>
 </section>
 {% endblock %}

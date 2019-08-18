@@ -3,12 +3,24 @@
 {% load bootstrap4 %}
 
 {% block body %}
-<h1>로그인</h1>
-<form method="POST">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">로그인</button>
-  {% endbuttons %}
-</form>
+<section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5">
+          <h2 class="mt-0 text-center">로그인</h2>
+          <hr class="divider my-4">
+            <form method="POST">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+                <button type="submit" class="btn btn-primary d-inline-block">로그인</button>
+                <div class="d-inline-block small ml-auto">
+                    <a href="{% url 'accounts:signup' %}">아직 회원이 아니신가요? - 회원가입하기</a>    
+                </div>
+              {% endbuttons %}
+            </form>            
+        </div>
+      </div>
+    </div>
+</section>
 {% endblock %}
