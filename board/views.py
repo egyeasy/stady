@@ -126,17 +126,20 @@ def fillout_question(request):
 
 @login_required
 def overview(request):
-    schoolRecord = SchoolRecord.objects.get(user=request.user)
-    record = Record.objects.get(user=request.user)
-    recordForm = RecordForm(instance=record)
+    schoolRecords = SchoolRecord.objects.filter(user=request.user)
+    records = Record.objects.filter(user=request.user)
+    if records:
+        recordForm = RecordForm(instance=records[0])
+    else:
+        recordForm = None
     tests = Test.objects.filter(user=request.user)
     targetUnivs = TargetUniv.objects.filter(user=request.user).order_by('order')
-    question = Question.objects.get(user=request.user)
+    questions = Question.objects.filter(user=request.user)
     context = {
-        'schoolRecord': schoolRecord,
+        'schoolRecords': schoolRecords,
         'recordForm': recordForm,
         'tests': tests,
         'targetUnivs': targetUnivs,
-        'question': question,
+        'questions': questions,
     }
     return render(request, 'board/overview.html', context)
