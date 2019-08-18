@@ -78,6 +78,7 @@ class TargetUniv(models.Model):
 class Question(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=10000)
+    is_staff = models.BooleanField(default=False, verbose_name="컨설턴트 작성 여부")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

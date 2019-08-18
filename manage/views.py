@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from board.models import SchoolRecord, Record, Test, TargetUniv, Question
-from board.forms import RecordForm
+from board.forms import RecordForm, QuestionForm
 
 # Create your views here.
 # TODO: staff athenticate
@@ -15,26 +15,45 @@ def student_list(request):
 
 def overview(request, student_email):
     user = get_user_model().objects.get(email=student_email)
-    schoolRecord = SchoolRecord.objects.get(user=user)
-    record = Record.objects.get(user=user)
-    recordForm = RecordForm(instance=record)
+    schoolRecords = SchoolRecord.objects.filter(user=user)
+    records = Record.objects.filter(user=user)
+    if records:
+        recordForm = RecordForm(instance=records[0])
+    else:
+        recordForm = None
     tests = Test.objects.filter(user=user)
     targetUnivs = TargetUniv.objects.filter(user=user).order_by('order')
-    question = Question.objects.get(user=user)
+    questions = Question.objects.filter(user=user)
     context = {
         'student': user,
-        'schoolRecord': schoolRecord,
+        'schoolRecord': schoolRecords,
         'recordForm': recordForm,
         'tests': tests,
         'targetUnivs': targetUnivs,
-        'question': question,
+        'question': questions,
     }
     return render(request, 'manage/overview.html', context)
 
 
 def feedback(request, student_email):
-    
-    context = {
+    user = get_user_model().objects.get(email=student_email)
+    if request.method == 'POST':
+        questionForm = QuestionForm(request.POST)
+        if questionForm.is_valid():
+            form = questionForm.save(commit=False)
+            form.user = user
+            form.is_staff = True
+            form.save()
+            return redirect('manage:feedback', student_email=student_email)
+    else:
+        questions = Question.objects.filter(user=user).order_by('created_at')
+        questionForm = QuestionForm()
+        context = {
+            'student': user,
+            'questions': questions,
+            'questionForm': questionForm,
+        }
+        return render(request, 'manage/feedback.html', context)
         
-    }
-    return render(request, 'manage/feedback.html', context)
+        
+        

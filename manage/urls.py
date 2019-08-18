@@ -5,8 +5,8 @@ app_name = "manage"
 
 urlpatterns = [
     path('students/', views.student_list, name="student_list"),
-    path('students/<str:student_email>/info', views.overview, name="overview"),
-    path('students/<str:student_email>/feedback', views.feedback, name="feedback"),
+    path('students/<str:student_email>/info/', views.overview, name="overview"),
+    path('students/<str:student_email>/feedback/', views.feedback, name="feedback"),
     # path('fillout-record/', views.fillout_record, name="fillout_record"),
 	# path('fillout-test', views.fillout_test, name="fillout_test"),
 	# path('fillout-test/', views.TestFormView.as_view(), name="fillout_test"),

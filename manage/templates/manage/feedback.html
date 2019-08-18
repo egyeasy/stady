@@ -37,11 +37,48 @@
         <h3 class="d-inline">
             5. 질문
         </h3>
-        <p class="w-50">
-            <div class="form-group">
-                <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+        {% if questions %}
+            {% for question in questions %}
+                {% if question.is_staff %}
+                    <div class="w-50 ml-auto">
+                        <h4>
+                            컨설턴트
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="w-50 mr-auto">
+                        <h4>
+                            {{ student.username }}
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div>
+                입력한 데이터가 없습니다.    
             </div>
-        </p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form questionForm %}
+            {% buttons %}
+                <button type="submit" class="btn btn-dark">피드백 작성</button>
+            {% endbuttons %}
+        </form>
     </div>
 </section>
+<script>
+    $(function() {
+        $('textarea').each(function() {
+            $(this).height($(this).prop('scrollHeight'));
+        });
+    });
+</script>
 {% endblock %}
