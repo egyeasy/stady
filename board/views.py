@@ -115,10 +115,12 @@ def fillout_question(request):
             form = questionForm.save(commit=False)
             form.user = request.user
             form.save()
-        return redirect('board:overview')
+        return redirect('board:fillout_question')
     else:
+        questions = Question.objects.filter(user=request.user)
         questionForm = QuestionForm()
         context = {
+            'questions': questions,
             'questionForm': questionForm,
         }
         return render(request, 'board/fillout_question.html', context)

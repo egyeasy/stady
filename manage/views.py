@@ -30,7 +30,7 @@ def overview(request, student_email):
         'recordForm': recordForm,
         'tests': tests,
         'targetUnivs': targetUnivs,
-        'question': questions,
+        'questions': questions,
     }
     return render(request, 'manage/overview.html', context)
 

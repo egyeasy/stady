@@ -31,6 +31,33 @@
     <h3>
     5. Q & A
     </h3>
+    {% if questions %}
+        {% for question in questions %}
+            {% if question.is_staff %}
+                <div class="w-50 ml-auto">
+                    <h4>
+                        컨설턴트
+                    </h4>
+                    <div class="form-group">
+                        <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                    </div>
+                </div>
+            {% else %}
+                <div class="w-50 mr-auto">
+                    <h4>
+                        {{ user.username }}
+                    </h4>
+                    <div class="form-group">
+                        <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div>
+            입력한 데이터가 없습니다.    
+        </div>
+    {% endif %}
       
     <form method="POST">
         {% csrf_token %}

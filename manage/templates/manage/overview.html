@@ -206,17 +206,23 @@
         {% if questions %}
             {% for question in questions %}
                 {% if question.is_staff %}
-                    <p class="w-50 d-inline-block ml-auto">
+                    <div class="w-50 ml-auto">
+                        <h4>
+                            컨설턴트
+                        </h4>
                         <div class="form-group">
                             <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
                         </div>
-                    </p>
+                    </div>
                 {% else %}
-                    <p class="w-50 d-inline-block mr-auto">
+                    <div class="w-50 mr-auto">
+                        <h4>
+                            {{ student.username }}
+                        </h4>
                         <div class="form-group">
                             <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
                         </div>
-                    </p>
+                    </div>
                 {% endif %}
             {% endfor %}
         {% else %}

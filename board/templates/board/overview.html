@@ -186,18 +186,32 @@
             5. 질문
         </h3>
         {% if questions %}
+            <a href="{% url 'board:fillout_question' %}"><button type="button" class="btn btn-dark">수정하기</button></a>
             {% for question in questions %}
-                <a href="{% url 'board:fillout_question' %}"><button type="button" class="btn btn-dark">수정하기</button></a>
-                <p class="w-50">
-                    <div class="form-group">
-                        <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                {% if question.is_staff %}
+                    <div class="w-50 ml-auto">
+                        <h4>
+                            컨설턴트
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
                     </div>
-                </p>
+                {% else %}
+                    <div class="w-50 mr-auto">
+                        <h4>
+                            {{ user.username }}
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         {% else %}
-                <a href="{% url 'board:fillout_question' %}"><button type="button" class="btn btn-dark">작성하기</button></a>
+            <a href="{% url 'board:fillout_question' %}"><button type="button" class="btn btn-dark">작성하기</button></a>
             <div>
-                입력한 데이터가 없습니다.
+                입력한 데이터가 없습니다.    
             </div>
         {% endif %}
     </div>
