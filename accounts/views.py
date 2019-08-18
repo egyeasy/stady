@@ -4,6 +4,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from .forms import CustomUserCreationForm, CustomConsultCreationForm
 from django.contrib import messages
+from django.urls import reverse
+
 
 # Create your views here.
 def signup(request):
@@ -14,9 +16,10 @@ def signup(request):
             auth_login(request, user)
             messages.success(request, '회원가입이 완료되었습니다.')
         else:
-            errors = form.errors
+            errors = str(form.errors).split('</li>')[0].split('<li>')[-1]
             print(errors)
-            return redirect('accounts:signup.html')
+            messages.error(request, errors)
+            return redirect(request.META.get('HTTP_REFERER'))
         return redirect('board:index')
     else:
         form = CustomUserCreationForm()

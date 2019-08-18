@@ -26,6 +26,15 @@ class CustomUserCreationForm(UserCreationForm):
         if email_qs.exists():
             raise forms.ValidationError("해당 이메일로 가입된 계정이 존재합니다.")
         return email
+    
+    
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("입력한 패스워드가 동일하지 않습니다.")
+        return password1
+
         
         
 class CustomConsultCreationForm(UserCreationForm):
