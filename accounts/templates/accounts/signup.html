@@ -14,9 +14,13 @@
               {% bootstrap_form form %}
               {{ form.media.js }}
               {% buttons %}
-                <button type="submit" class="btn btn-primary">회원가입</button>
+                <button type="submit" class="d-block btn btn-primary mx-auto">동의하고 가입하기</button>
+                <div class="small text-muted mt-2 mb-4">
+                    본인은 만 14세 이상이며, 아래의 개인정보 처리방침을 확인하였으며, 동의합니다.
+                </div>
               {% endbuttons %}
-            </form>            
+            </form>
+            {% include 'accounts/privacy.html' %}
         </div>
       </div>
     </div>

@@ -72,27 +72,27 @@ class RecordForm(forms.ModelForm):
 
 class TestForm(forms.ModelForm):
     # month = forms.IntegerField()
-    koreanPoint = forms.IntegerField(label="국어 표준점수")
-    koreanPercent = forms.IntegerField(label="국어 백분위")
+    koreanPoint = forms.IntegerField(label="국어 표준점수", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
+    koreanPercent = forms.IntegerField(label="국어 백분위", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
     # koreanGrade = forms.IntegerField(label="국어 등급")
-    mathPoint = forms.IntegerField(label="수학 표준점수")
-    mathPercent = forms.IntegerField(label="수학 백분위")
+    mathPoint = forms.IntegerField(label="수학 표준점수", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
+    mathPercent = forms.IntegerField(label="수학 백분위", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
     # mathGrade = forms.IntegerField(label="수학 등급")
-    englishPoint = forms.IntegerField(label="영어 표준점수")
-    englishPercent = forms.IntegerField(label="영어 백분위")
+    englishPoint = forms.IntegerField(label="영어 표준점수", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
+    englishPercent = forms.IntegerField(label="영어 백분위", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
     # englishGrade = forms.IntegerField(label="영어 등급")
     # tamguFirstName = forms.CharField(max_length=20)
     # tamguFirstGrade = forms.IntegerField(label="탐구1 등급")
-    tamguFirstPoint = forms.IntegerField(label="탐구1 표준점수")
-    tamguFirstPercent = forms.IntegerField(label="탐구1 백분위")
+    tamguFirstPoint = forms.IntegerField(label="탐구1 표준점수", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
+    tamguFirstPercent = forms.IntegerField(label="탐구1 백분위", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
     # tamguSecondName = forms.CharField(max_length=20)
     # tamguSecondGrade = forms.IntegerField(label="탐구2 등급")
-    tamguSecondPoint = forms.IntegerField(label="탐구2 표준점수")
-    tamguSecondPercent = forms.IntegerField(label="탐구2 백분위")
+    tamguSecondPoint = forms.IntegerField(label="탐구2 표준점수", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
+    tamguSecondPercent = forms.IntegerField(label="탐구2 백분위", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
     # foreignName = forms.CharField(max_length=20, label="제2외국어")
     # foreignGrade = forms.IntegerField(label="제2외국어 등급")
-    foreignPoint = forms.IntegerField(label="제2외국어 표준점수")
-    foreignPercent = forms.IntegerField(label="제2외국어 백분위")
+    foreignPoint = forms.IntegerField(label="제2외국어 표준점수", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
+    foreignPercent = forms.IntegerField(label="제2외국어 백분위", widget=forms.NumberInput(attrs={'style': 'width:80px'}))
     
     class Meta:
         model = Test
@@ -123,6 +123,18 @@ class TestForm(forms.ModelForm):
                   'foreignPoint',
                   'foreignPercent',
                   ]
+        
+    def __init__(self, *args, **kwargs):
+        super(TestForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
+        self.fields['koreanGrade'].widget.attrs['width'] = 80
+        self.fields['mathGrade'].widget.attrs['width'] = 80
+        self.fields['englishGrade'].widget.attrs['width'] = 80
+        self.fields['tamguFirstName'].widget.attrs['width'] = 80
+        self.fields['tamguFirstGrade'].widget.attrs['width'] = 80
+        self.fields['tamguSecondName'].widget.attrs['width'] = 80
+        self.fields['tamguSecondGrade'].widget.attrs['width'] = 80
+        self.fields['foreignName'].widget.attrs['width'] = 80
+        self.fields['foreignGrade'].widget.attrs['width'] = 80
 
         
 class TargetUnivForm(forms.ModelForm):
