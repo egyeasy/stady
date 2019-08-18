@@ -315,5 +315,12 @@
   <script src="{% static 'js/creative.min.js' %}"></script>
 
 </body>
-
+<!--   alert messages   -->
+{% if messages %}
+    {% for message in messages %}
+        <script>
+                alert('{{ message }}')
+        </script>
+    {% endfor %}
+{% endif %}
 </html>

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from .forms import CustomUserCreationForm, CustomConsultCreationForm
+from django.contrib import messages
 
 # Create your views here.
 def signup(request):
@@ -11,6 +12,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
+            messages.success(request, '회원가입이 완료되었습니다.')
         else:
             errors = form.errors
             print(errors)

@@ -12,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
     # email = VerifiedEmailField(label='email', fieldsetup_id='registration-form-email', required=True)
     username = forms.CharField(label="이름")
     school = forms.CharField(label="학교")
-    grade = forms.CharField(label="학년")
+    # grade = forms.CharField(label="학년")
 
     class Meta:
         model = get_user_model()
@@ -20,6 +20,13 @@ class CustomUserCreationForm(UserCreationForm):
         # fields = UserCreationForm.Meta.fields
         fields = ['email', 'username', 'school', 'grade']
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        email_qs = get_user_model().objects.filter(email=email)
+        if email_qs.exists():
+            raise forms.ValidationError("해당 이메일로 가입된 계정이 존재합니다.")
+        return email
+        
         
 class CustomConsultCreationForm(UserCreationForm):
     # email = VerifiedEmailField(label='email', fieldsetup_id='registration-form-email', required=True)
