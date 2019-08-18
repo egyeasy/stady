@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from board.models import SchoolRecord, Record, Test, TargetUniv, Question
-from board.forms import RecordForm, QuestionForm
+from board.forms import RecordForm, FeedbackForm
 
 # Create your views here.
 # TODO: staff athenticate
@@ -38,20 +38,20 @@ def overview(request, student_email):
 def feedback(request, student_email):
     user = get_user_model().objects.get(email=student_email)
     if request.method == 'POST':
-        questionForm = QuestionForm(request.POST)
-        if questionForm.is_valid():
-            form = questionForm.save(commit=False)
+        feedbackForm = FeedbackForm(request.POST)
+        if feedbackForm.is_valid():
+            form = feedbackForm.save(commit=False)
             form.user = user
             form.is_staff = True
             form.save()
             return redirect('manage:feedback', student_email=student_email)
     else:
         questions = Question.objects.filter(user=user).order_by('created_at')
-        questionForm = QuestionForm()
+        feedbackForm = FeedbackForm()
         context = {
             'student': user,
             'questions': questions,
-            'questionForm': questionForm,
+            'feedbackForm': feedbackForm,
         }
         return render(request, 'manage/feedback.html', context)
         

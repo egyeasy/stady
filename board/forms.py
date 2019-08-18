@@ -139,3 +139,14 @@ class QuestionForm(forms.ModelForm):
         fields = [
             'content',
         ]
+        
+class FeedbackForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '피드백 사항을 입력하세요'}),
+                             label=(''),
+                             required=False)
+    
+    class Meta:
+        model = Question
+        fields = [
+            'content',
+        ]
