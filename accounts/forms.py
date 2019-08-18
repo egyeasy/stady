@@ -19,3 +19,14 @@ class CustomUserCreationForm(UserCreationForm):
         # UserCreationForm에 있는 Meta 클래스의 fields를 그대로 쓰겠다.
         # fields = UserCreationForm.Meta.fields
         fields = ['email', 'username', 'school', 'grade']
+
+        
+class CustomConsultCreationForm(UserCreationForm):
+    # email = VerifiedEmailField(label='email', fieldsetup_id='registration-form-email', required=True)
+    username = forms.CharField(label="이름")
+
+    class Meta:
+        model = get_user_model()
+        # UserCreationForm에 있는 Meta 클래스의 fields를 그대로 쓰겠다.
+        # fields = UserCreationForm.Meta.fields
+        fields = ['email', 'username']

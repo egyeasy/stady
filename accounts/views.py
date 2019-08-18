@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomConsultCreationForm
 
 # Create your views here.
 def signup(request):
@@ -42,7 +42,7 @@ def logout(request):
 
 def consult_signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomConsultCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_staff = True
@@ -50,7 +50,7 @@ def consult_signup(request):
             auth_login(request, user)
         return redirect('board:index')
     else:
-        form = UserCreationForm()
+        form = CustomConsultCreationForm()
         context = {
             'form': form
         }
