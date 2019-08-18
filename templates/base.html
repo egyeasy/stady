@@ -55,6 +55,10 @@
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="{% url 'manage:student_list' %}">학생 관리</a>
               </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'board:overview' %}">입력한 정보</a>
+              </li>
               {% endif %}
               <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="{% url 'accounts:logout' %}">로그아웃</a>
