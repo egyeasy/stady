@@ -34,7 +34,12 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-        return redirect('board:index')
+            return redirect('board:index')
+        else:
+            errors = str(form.errors).split('</li>')[0].split('<li>')[-1]
+            print(errors)
+            messages.error(request, errors)
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
         form = AuthenticationForm()
         return render(request, 'accounts/login.html', {'form': form})
