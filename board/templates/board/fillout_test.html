@@ -61,30 +61,36 @@
                         <table class="table table-dark mx-auto">
                           <thead>
                             <tr>
-                              <th scope="col">과목명</th>
-                              <th scope="col" colspan="2">국어</th>
-                              <th scope="col" colspan="2">수학</th>
-                              <th scope="col" colspan="2">영어</th>
+                              <th scope="col" class="">과목명</th>
+                              <th scope="col" colspan="3">국어</th>
+                              <th scope="col" colspan="3">수학</th>
+                              <th scope="col" colspan="3">영어</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <th scope="row"></th>
+                              <td class="col-md-5">등급</td>
+                              <td class="w-50">표준점수</td>
+                              <td class="w-50">백분위</td>
                               <td>등급</td>
-                              <td>원점수</td>
+                              <td>표준점수</td>
+                              <td>백분위</td>
                               <td>등급</td>
-                              <td>원점수</td>
-                              <td>등급</td>
-                              <td>원점수</td>
+                              <td>표준점수</td>
+                              <td>백분위</td>
                             </tr>
                             <tr>
                               <th scope="row"></th>
-                              <td><div>{{ form.koreanGrade }}</div></td>
-                              <td><div>{{ form.koreanPoint }}</div></td>
+                              <td class="col-md-5"><div>{{ form.koreanGrade }}</div></td>
+                              <td class="w-50"><div>{{ form.koreanPoint }}</div></td>
+                              <td class="w-50"><div>{{ form.koreanPercent }}</div></td>
                               <td><div>{{ form.mathGrade }}</div></td>
                               <td><div>{{ form.mathPoint }}</div></td>
+                              <td><div>{{ form.mathPercent }}</div></td>
                               <td><div>{{ form.englishGrade }}</div></td>
                               <td><div>{{ form.englishPoint }}</div></td>
+                              <td><div>{{ form.englishPercent }}</div></td>
                             </tr>
                           </tbody>
                         </table>
@@ -93,31 +99,37 @@
                             <tr>
                               <th scope="col">과목명</th>
                               <th scope="col">탐구1</th>
-                              <th scope="col">{{ form.tamguFirstName }}</th>
+                              <th scope="col" colspan="2">{{ form.tamguFirstName }}</th>
                               <th scope="col">탐구2</th>
-                              <th scope="col">{{ form.tamguSecondName }}</th>
+                              <th scope="col" colspan="2">{{ form.tamguSecondName }}</th>
                               <th scope="col">제2외국어</th>
-                              <th scope="col">{{ form.foreignName }}</th>
+                              <th scope="col" colspan="2">{{ form.foreignName }}</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <th scope="row"></th>
                               <td>등급</td>
-                              <td>원점수</td>
+                              <td>표준점수</td>
+                              <td>백분위</td>
                               <td>등급</td>
-                              <td>원점수</td>
+                              <td>표준점수</td>
+                              <td>백분위</td>
                               <td>등급</td>
-                              <td>원점수</td>
+                              <td>표준점수</td>
+                              <td>백분위</td>
                             </tr>
                             <tr>
                               <th scope="row"></th>
                               <td><div>{{ form.tamguFirstGrade }}</div></td>
                               <td><div>{{ form.tamguFirstPoint }}</div></td>
+                              <td><div>{{ form.tamguFirstPercent }}</div></td>
                               <td><div>{{ form.tamguSecondGrade }}</div></td>
                               <td><div>{{ form.tamguSecondPoint }}</div></td>
+                              <td><div>{{ form.tamguSecondPercent }}</div></td>
                               <td><div>{{ form.foreignGrade }}</div></td>
                               <td><div>{{ form.foreignPoint }}</div></td>
+                              <td><div>{{ form.foreignPercent }}</div></td>
                             </tr>
                           </tbody>
                         </table>

@@ -72,21 +72,27 @@ class RecordForm(forms.ModelForm):
 
 class TestForm(forms.ModelForm):
     # month = forms.IntegerField()
-    koreanPoint = forms.IntegerField(label="국어 원점수")
+    koreanPoint = forms.IntegerField(label="국어 표준점수")
+    koreanPercent = forms.IntegerField(label="국어 백분위")
     # koreanGrade = forms.IntegerField(label="국어 등급")
-    mathPoint = forms.IntegerField(label="수학 원점수")
+    mathPoint = forms.IntegerField(label="수학 표준점수")
+    mathPercent = forms.IntegerField(label="수학 백분위")
     # mathGrade = forms.IntegerField(label="수학 등급")
-    englishPoint = forms.IntegerField(label="영어 원점수")
+    englishPoint = forms.IntegerField(label="영어 표준점수")
+    englishPercent = forms.IntegerField(label="영어 백분위")
     # englishGrade = forms.IntegerField(label="영어 등급")
     # tamguFirstName = forms.CharField(max_length=20)
     # tamguFirstGrade = forms.IntegerField(label="탐구1 등급")
-    tamguFirstPoint = forms.IntegerField(label="탐구1 원점수")
+    tamguFirstPoint = forms.IntegerField(label="탐구1 표준점수")
+    tamguFirstPercent = forms.IntegerField(label="탐구1 백분위")
     # tamguSecondName = forms.CharField(max_length=20)
     # tamguSecondGrade = forms.IntegerField(label="탐구2 등급")
-    tamguSecondPoint = forms.IntegerField(label="탐구2 원점수")
+    tamguSecondPoint = forms.IntegerField(label="탐구2 표준점수")
+    tamguSecondPercent = forms.IntegerField(label="탐구2 백분위")
     # foreignName = forms.CharField(max_length=20, label="제2외국어")
     # foreignGrade = forms.IntegerField(label="제2외국어 등급")
-    foreignPoint = forms.IntegerField(label="제2외국어 원점수")
+    foreignPoint = forms.IntegerField(label="제2외국어 표준점수")
+    foreignPercent = forms.IntegerField(label="제2외국어 백분위")
     
     class Meta:
         model = Test
@@ -96,20 +102,26 @@ class TestForm(forms.ModelForm):
                   'year',
                   'month',
                   'koreanPoint',
+                  'koreanPercent',
                   'koreanGrade',
                   'mathPoint',
+                  'mathPercent',
                   'mathGrade',
                   'englishPoint',
+                  'englishPercent',
                   'englishGrade',
                   'tamguFirstName',
                   'tamguFirstGrade',
                   'tamguFirstPoint',
+                  'tamguFirstPercent',
                   'tamguSecondName',
                   'tamguSecondGrade',
                   'tamguSecondPoint',
+                  'tamguSecondPercent',
                   'foreignName',
                   'foreignGrade',
                   'foreignPoint',
+                  'foreignPercent',
                   ]
 
         
