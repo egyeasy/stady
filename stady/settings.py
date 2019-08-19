@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap4',
+    # 'bootstrap4',
     'simple_email_confirmation',
     'django.contrib.admin',
     'django.contrib.auth',

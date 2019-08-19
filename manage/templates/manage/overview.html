@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-
-{% load bootstrap4 %}
-
-
 {% block body %}
 <section class="page-section bg-primary" id="about">
     <div class="container">
@@ -80,7 +76,7 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% bootstrap_form recordForm %}
+                    {{ recordForm.as_p }}
                 </form>
             </p>
         {% else %}

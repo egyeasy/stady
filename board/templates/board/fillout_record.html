@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load bootstrap4 %}
-
 {% block body %}
 <section class="page-section" id="contact">
     <div class="container">
@@ -36,10 +34,8 @@
             </div>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% bootstrap_form recordForm %}
-                {% buttons %}
-                    <button type="submit" class="btn btn-dark">저장</button>
-                {% endbuttons %}
+                {{ recordForm }}
+                <button type="submit" class="btn btn-dark">저장</button>
             </form>
         </div>
       </div>
