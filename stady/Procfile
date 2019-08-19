@@ -1,1 +1,1 @@
-web: gunicorn stady.wsgi
+web: gunicorn stady.wsgi --log-file -
