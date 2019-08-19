@@ -13,8 +13,6 @@ django-bootstrap4==0.0.8
 django-heroku==0.3.1
 django-simple-email-confirmation==0.60
 django-verified-email-field==1.5.1
-flake8==3.5.0
-Flask==1.0.2
 gast==0.2.0
 grpcio==1.12.0
 gunicorn==19.9.0
@@ -27,9 +25,6 @@ isort==4.3.4
 itsdangerous==1.1.0
 jedi==0.12.0
 Jinja2==2.10
-jupyter-client==5.2.3
-jupyter-core==4.4.0
-Keras==2.1.6
 kiwisolver==1.0.1
 lazy-object-proxy==1.3.1
 Markdown==2.6.11
@@ -38,9 +33,7 @@ matplotlib==2.2.2
 mccabe==0.6.1
 mpmath==1.0.0
 networkx==2.1
-numpy==1.14.3
 packaging==17.1
-pandas==0.23.0
 parso==0.2.1
 patsy==0.5.0
 pexpect==4.5.0
@@ -60,15 +53,11 @@ python-dateutil==2.7.3
 pytz==2018.4
 PyYAML==3.12
 pyzmq==17.0.0
-scikit-learn==0.19.1
-scipy==1.1.0
-seaborn==0.8.1
 simplegeneric==0.8.1
 six==1.11.0
 statsmodels==0.9.0
 sympy==1.1.1
 tensorboard==1.8.0
-tensorflow==1.8.0
 termcolor==1.1.0
 tornado==5.0.2
 traitlets==4.3.2
