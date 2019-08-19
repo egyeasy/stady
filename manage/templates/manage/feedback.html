@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block body %}
+<section class="page-section bg-primary" id="about">
+    <div class="container">
+        <h1>
+            학생 정보
+        </h1>
+        <p class="w-50">
+            <div>
+            이름 : {{ student.username }}   
+            </div>
+            <div>
+            학교 : {{ student.school }}   
+            </div>
+            <div>
+            학년 : {{ student.grade }}학년  
+            </div>
+            <div>
+            이메일 : {{ student.email }}   
+            </div>
+        </p>
+        <!-- manage nav -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'manage:overview' student.email %}">학생 정보</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'manage:feedback' student.email %}">피드백</a>
+          </li>
+        </ul>
+        
+        <h3 class="d-inline">
+            5. 질문
+        </h3>
+        {% if questions %}
+            {% for question in questions %}
+                {% if question.is_staff %}
+                    <div class="w-50 ml-auto">
+                        <h4>
+                            컨설턴트
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="w-50 mr-auto">
+                        <h4>
+                            {{ student.username }}
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div>
+                입력한 데이터가 없습니다.    
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form feedbackForm %}
+            {% buttons %}
+                <button type="submit" class="btn btn-dark">피드백 작성</button>
+            {% endbuttons %}
+        </form>
+    </div>
+</section>
+<script>
+    $(function() {
+        $('textarea').each(function() {
+            $(this).height($(this).prop('scrollHeight'));
+        });
+    });
+</script>
+{% endblock %}

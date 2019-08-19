@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+<section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="mt-0 text-center">내 정보</h2>
+          <hr class="divider my-4">
+            <!-- fillout nav -->
+            <ul class="nav nav-tabs mb-4">
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_school' %}">내신</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini active" href="{% url 'board:fillout_record' %}">생활기록부</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_test' %}">모의고사</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_target' %}">목표 대학</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-mini" href="{% url 'board:fillout_question' %}">Q&A</a>
+              </li>
+            </ul>
+
+            <h3>
+                2. 생활기록부
+            </h3>
+            <div class="mb-3">
+                생활기록부 자료를 압축 파일(.zip 형식)로 업로드해주세요.
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form recordForm %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-dark">저장</button>
+                {% endbuttons %}
+            </form>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

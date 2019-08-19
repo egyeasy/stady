@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+
+
+{% block body %}
+<section class="page-section bg-primary" id="about">
+    <div class="container">
+        <h1>
+            내 정보
+        </h1>
+
+        <h3 class="d-inline-block mt-3">
+            1. 내신
+        </h3>
+        {% if schoolRecords %}
+        <a href="{% url 'board:fillout_school' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">수정하기</button></a>
+        <p class="w-50">
+                <table class="table table-dark">
+                    {% for schoolRecord in schoolRecords %}
+                        <tr>
+                            <td>1-1</td>
+                            <td>{{ schoolRecord.firstFirst }}</td>
+                            <td>1-2</td>
+                            <td>{{ schoolRecord.firstSecond }}</td>
+                        </tr>
+                        <tr>
+                            <td>2-1</td>
+                            <td>{{ schoolRecord.secondFirst }}</td>
+                            <td>2-2</td>
+                            <td>{{ schoolRecord.SecondSecond }}</td>
+                        </tr>
+                        <tr>
+                            <td>3-1</td>
+                            <td>{{ schoolRecord.thirdFirst }}</td>
+                            <td>3-2</td>
+                            <td>{{ schoolRecord.thirdSecond }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <a href="{% url 'board:fillout_school' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">작성하기</button></a>
+                <div>
+                    입력한 데이터가 없습니다.
+                </div>
+            {% endif %}
+        </p>
+        
+        <h3 class="d-inline-block mt-3">
+            2. 생활기록부
+        </h3>
+            {% if recordForm %}
+                <p class="w-50">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form recordForm %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-dark btn-sm ml-2 mb-2">저장</button>
+                        {% endbuttons %}
+                    </form>
+                </p>
+            {% else %}
+                <a href="{% url 'board:fillout_record' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">작성하기</button></a>
+                <div>
+                    입력한 데이터가 없습니다.
+                </div>
+            {% endif %}
+    
+        <h3 class="d-inline-block mt-3">
+            3. 모의고사
+        </h3>
+        {% if tests %}
+            <a href="{% url 'board:fillout_test' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">수정하기</button></a>
+            <p class="w-50">
+                    {% for test in tests %}
+                        <h5>
+                            {{ test.year }}년 {{ test.month }}월
+                        </h5>
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                  <th scope="col">과목명</th>
+                                  <th scope="col" colspan="2">국어</th>
+                                  <th scope="col" colspan="2">수학</th>
+                                  <th scope="col" colspan="2">영어</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <th scope="row"></th>
+                                  <td>등급</td>
+                                  <td>원점수</td>
+                                  <td>등급</td>
+                                  <td>원점수</td>
+                                  <td>등급</td>
+                                  <td>원점수</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"></th>
+                                  <td><div>{{ test.koreanGrade }}</div></td>
+                                  <td><div>{{ test.koreanPoint }}</div></td>
+                                  <td><div>{{ test.mathGrade }}</div></td>
+                                  <td><div>{{ test.mathPoint }}</div></td>
+                                  <td><div>{{ test.englishGrade }}</div></td>
+                                  <td><div>{{ test.englishPoint }}</div></td>
+                                </tr>
+                            </tbody>
+                              <thead>
+                                <tr>
+                                  <th scope="col">과목명</th>
+                                  <th scope="col">탐구1</th>
+                                  <th scope="col">{{ test.tamguFirstName }}</th>
+                                  <th scope="col">탐구2</th>
+                                  <th scope="col">{{ test.tamguSecondName }}</th>
+                                  <th scope="col">제2외국어</th>
+                                  <th scope="col">{{ test.foreignName }}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row"></th>
+                                  <td>등급</td>
+                                  <td>원점수</td>
+                                  <td>등급</td>
+                                  <td>원점수</td>
+                                  <td>등급</td>
+                                  <td>원점수</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"></th>
+                                  <td><div>{{ test.tamguFirstGrade }}</div></td>
+                                  <td><div>{{ test.tamguFirstPoint }}</div></td>
+                                  <td><div>{{ test.tamguSecondGrade }}</div></td>
+                                  <td><div>{{ test.tamguSecondPoint }}</div></td>
+                                  <td><div>{{ test.foreignGrade }}</div></td>
+                                  <td><div>{{ test.foreignPoint }}</div></td>
+                                </tr>
+                              </tbody>
+                        </table>
+
+                    {% endfor %}
+            </p>
+        {% else %}
+            <a href="{% url 'board:fillout_test' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">작성하기</button></a>
+            <div>
+                입력한 데이터가 없습니다.
+            </div>
+        {% endif %}
+    
+        <h3 class="d-inline-block mt-3">
+            4. 목표 대학
+        </h3>
+        {% if targetUnivs %}
+            <a href="{% url 'board:fillout_target' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">수정하기</button></a>
+            <p class="w-50">
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">지망순</th>
+                          <th scope="col">대학교</th>
+                          <th scope="col">전공</th>
+                          <th scope="col">지원전형</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for target in targetUnivs %}
+                        <tr>
+                          <th scope="row">{{ target.order }}</th>
+                          <td>{{ target.univ }}</td>
+                          <td>{{ target.major }}</td>
+                          <td>{{ target.applyType }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+        {% else %}
+            <a href="{% url 'board:fillout_target' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">작성하기</button></a>
+            <div>
+                입력한 데이터가 없습니다.
+            </div>
+        {% endif %}
+        </p>
+    
+        <h3 class="d-inline-block mt-3">
+            5. 질문
+        </h3>
+        {% if questions %}
+            <a href="{% url 'board:fillout_question' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">수정하기</button></a>
+            {% for question in questions %}
+                {% if question.is_staff %}
+                    <div class="w-50 ml-auto">
+                        <h4>
+                            컨설턴트
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="w-50 mr-auto">
+                        <h4>
+                            {{ user.username }}
+                        </h4>
+                        <div class="form-group">
+                            <textarea class="form-control-plaintext" id="exampleFormControlTextarea1" rows="3" readonly>{{ question.content }}</textarea>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <a href="{% url 'board:fillout_question' %}"><button type="button" class="btn btn-dark btn-sm ml-2 mb-2">작성하기</button></a>
+            <div>
+                입력한 데이터가 없습니다.    
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
