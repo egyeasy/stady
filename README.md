@@ -31,3 +31,7 @@ https://stackoverflow.com/questions/24935271/django-custom-user-email-account-ve
 
 위에꺼 안돼서 밑에걸로 넣어놓음(인증 기능은 없는 상태)
 https://pypi.org/project/django-simple-email-confirmation/
+
+### heroku
+Collectstatic 관련 이슈 - collectstatic을 쓰지 않는 쪽으로 해결된 듯
+https://stackoverflow.com/questions/36665889/collectstatic-error-while-deploying-django-app-to-heroku/36676953
