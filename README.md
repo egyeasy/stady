@@ -78,9 +78,10 @@ django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # whitenoise 공식 문서 기반의 최신 형태(v4.0)
 ```
 
-heroku collectstatic 과정에서 에러가 나서 push 과정에서는 disable한 다음 `heroku run python manage.py collectstatic`을 통해 사후적으로 static을 받으려고 했으나 실패.
+heroku collectstatic 과정에서 에러가 나서 push 과정에서는 disable한 다음 `heroku run python manage.py collectstatic`을 통해 사후적으로 static을 받으려고 했으나 실패 -> 받지 않아도 debug = True 라면 static을 처리하는 데 큰 문제가 없는 듯함.
 
 https://medium.com/@vonkunesnewton/understanding-static-files-in-django-heroku-1b8d2f003977
 
 위 링크를 참조하여 그냥 Debug = True 모드로 감.
 
+bootstrap4 또한 이미 heroku에 설치되어 있었음. push 과정에서 배제하고 나중에 해결해도 되는 듯(아니면 예전 push 때 뭔가 잘못 설정되어 있었거)
