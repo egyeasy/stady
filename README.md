@@ -75,5 +75,7 @@ django_heroku.settings(locals())
 
 # django-heroku whitenoise setting
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # whitenoise 공식 문서 기반의 최신 형태(v4.0)
 ```
+
+heroku collectstatic 과정에서 에러가 나서 push 과정에서는 disable한 다음 `heroku run python manage.py collectstatic`을 통해 사후적으로 static을 받았음

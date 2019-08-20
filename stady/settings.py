@@ -141,7 +141,7 @@ STATICFILES_DIRS = (
 STATIC_URL = '/static/'
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 절대경로로 나타내기 때문에 os.path.join 사용
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
