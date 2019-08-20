@@ -145,8 +145,8 @@ STATICFILES_DIRS = (
 )
 
 # 절대경로로 나타내기 때문에 os.path.join 사용
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # django-heroku setting
 django_heroku.settings(locals())
