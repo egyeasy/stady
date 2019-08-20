@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load bootstrap4 %}
+
 {% block body %}
 <section class="page-section bg-primary" id="about">
     <div class="container">
@@ -63,7 +65,7 @@
 
         <form method="POST">
             {% csrf_token %}
-            {{ feedbackForm.as_p }}
+            {% bootstrap_form feedbackForm %}
             <button type="submit" class="btn btn-dark">피드백 작성</button>
         </form>
     </div>

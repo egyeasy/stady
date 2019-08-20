@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load bootstrap4 %}
+
 {% block body %}
 <section class="page-section" id="contact">
     <div class="container">
@@ -38,7 +40,7 @@
             <p>
                 <form method="POST">
                     {% csrf_token %}
-                    {{ schoolRecordForm.as_p }}
+                    {% bootstrap_form schoolRecordForm %}
                     <button type="submit" class="btn btn-dark">저장</button>
                 </form>
             </p>
