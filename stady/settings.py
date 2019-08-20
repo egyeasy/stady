@@ -153,7 +153,7 @@ django_heroku.settings(locals())
 
 # django-heroku whitenoise setting
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # customize user
 AUTH_USER_MODEL = 'accounts.User'
