@@ -46,5 +46,10 @@ https://docs.djangoproject.com/en/2.1/howto/static-files/#deployment
 #### ROOT path 설정하기(500 error when DEBUG=True)
 https://stackoverflow.com/questions/53246297/django-core-exceptions-suspiciousfileoperation-the-joined-path-is-located-outsi
 
+위에거 안돼서 heroku 공식 문서 참조
+https://devcenter.heroku.com/articles/django-assets
+
 #### log
 https://stackoverflow.com/questions/18920428/django-logging-on-heroku/20983546#20983546
+
+#### heroku를 위한 settings.py
