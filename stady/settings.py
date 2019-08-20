@@ -134,19 +134,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
-# 파일 주소에 접미사를 만들어줌
-MEDIA_URL = '/media/'
-
-
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'static'),
 )
 
+STATIC_URL = '/static/'
+
+
 # 절대경로로 나타내기 때문에 os.path.join 사용
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 파일 주소에 접미사를 만들어줌
+MEDIA_URL = '/media/'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # django-heroku setting
 django_heroku.settings(locals())
