@@ -53,3 +53,27 @@ https://devcenter.heroku.com/articles/django-assets
 https://stackoverflow.com/questions/18920428/django-logging-on-heroku/20983546#20983546
 
 #### heroku를 위한 settings.py
+static 폴더의 이름을 staticfiles로 변경
+```python
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_URL = '/static/'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# 절대경로로 나타내기 때문에 os.path.join 사용
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 파일 주소에 접미사를 만들어줌
+MEDIA_URL = '/media/'
+
+
+# django-heroku setting
+django_heroku.settings(locals())
+
+# django-heroku whitenoise setting
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+```
