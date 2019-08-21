@@ -85,3 +85,6 @@ https://medium.com/@vonkunesnewton/understanding-static-files-in-django-heroku-1
 위 링크를 참조하여 그냥 Debug = True 모드로 감.
 
 bootstrap4 또한 이미 heroku에 설치되어 있었음. push 과정에서 배제하고 나중에 해결해도 되는 듯(아니면 예전 push 때 뭔가 잘못 설정되어 있었거)
+
+### 도메인 네임서버 변경 - Cloudflare
+https://blog.naver.com/PostView.nhn?blogId=kbs4674&logNo=221446015988&parentCategoryNo=&categoryNo=14&viewDate=&isShowPopularPosts=true&from=search
