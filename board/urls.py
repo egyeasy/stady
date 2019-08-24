@@ -13,4 +13,5 @@ urlpatterns = [
     path('fillout-target/', views.TargetUnivFormView.as_view(), name="fillout_target"),
     path('fillout-question/', views.fillout_question, name="fillout_question"),
     path('overview/', views.overview, name="overview"),
+    path('register/', views.register, name="register"),
 ]

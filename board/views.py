@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import SchoolRecord, Record, Test, TargetUniv, Question
 from .forms import SchoolRecordForm, RecordForm, TestForm, TargetUnivForm, QuestionForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -149,3 +150,13 @@ def overview(request):
         'questions': questions,
     }
     return render(request, 'board/overview.html', context)
+
+
+@login_required
+def register(request):
+    messages.success(request, '신청이 완료되었습니다. 등록하신 이메일로 안내 메일이 발송될 예정입니다.')
+    context = {
+        
+    }
+    # return render(request, 'board/register.html', context)
+    return redirect('board:overview')

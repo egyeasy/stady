@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+<section class="page-section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="mt-0 text-center">컨설팅 신청하기</h2>
+          <hr class="divider my-4">
+            <p class="">
+                <div>
+                    계좌이체와 네이버 결제 두 가지 중 하나를 선택해서 신청해주세요.
+                </div>
+                <div>
+                    입금 확인 후에 가입한 이메일을 통해 안내를 해드리겠습니다.
+                </div>    
+            </p>
+            <h3>
+                계좌이체
+            </h3>
+            <div class="mb-2">
+                학기별 내신 등급을 소수점 둘째 자리에서 반올림해서 입력해주세요.
+            </div>
+            <div>
+                (예: 1학년 1학기 4.33)      
+            </div>
+            <p>
+            </p>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}
