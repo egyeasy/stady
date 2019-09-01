@@ -88,3 +88,11 @@ bootstrap4 또한 이미 heroku에 설치되어 있었음. push 과정에서 배
 
 ### 도메인 네임서버 변경 - Cloudflare
 https://blog.naver.com/PostView.nhn?blogId=kbs4674&logNo=221446015988&parentCategoryNo=&categoryNo=14&viewDate=&isShowPopularPosts=true&from=search
+
+### 초기 접속이 느린 문제
+유저가 한동안 접속하지 않으면 절전 모드처럼 되어버림
+-> 시도 해결책 : AWS EC2에 올린다
+https://wayhome25.github.io/etc/2017/03/30/heroku-why-slow/
+
+### EC2 배포
+https://nachwon.github.io/django-deploy-1-aws/
