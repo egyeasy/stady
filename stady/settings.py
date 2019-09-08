@@ -28,7 +28,10 @@ SECRET_KEY = '4+^whadcrsmr+fl&e@zy(oxrkzxtdn7e+s^xl9n6jwdg8k0iwi'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '.ap-northeast-2.compute.amazonaws.com',
+]
 
 
 # Application definition

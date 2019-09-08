@@ -96,3 +96,6 @@ https://wayhome25.github.io/etc/2017/03/30/heroku-why-slow/
 
 ### EC2 배포
 https://nachwon.github.io/django-deploy-1-aws/
+
+### EC2 ubuntu 접속
+`ssh -i ~/.ssh/stady-django.pem ubuntu@ec2-13-125-250-48.ap-northeast-2.compute.amazonaws.com`
